@@ -1,0 +1,5 @@
+# Created by pytest automatically.
+*.pyc
+.idea/workspace.xml
+TestCases/geckodriver.log
+Config/config.ini
