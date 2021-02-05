@@ -4,3 +4,4 @@
 Scripts/geckodriver.log
 Config/config.ini
 logs/ui_automation.log
+*.png

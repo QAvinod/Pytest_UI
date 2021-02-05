@@ -11355,3 +11355,12 @@ SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//input[@ty
 [04/Feb/2021 10:30:30.712 5952 ] ERROR [ui_logger:WebDriver_Wait.py:__web_element_wait:32] Message: no such element: Unable to locate element: {"method":"css selector","selector":"[name="loginName"]"}
   (Session info: chrome=87.0.4280.88)
 
+[05/Feb/2021 09:56:35.443 4126 ] ERROR [ui_logger:WebDriver_Wait.py:__web_element_wait:32] Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@placeholder="Name"]"}
+  (Session info: chrome=87.0.4280.88)
+
+[05/Feb/2021 09:56:37.084 4126 ] ERROR [ui_logger:WebDriver_Wait.py:__web_element_wait:32] Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@placeholder="Name"]"}
+  (Session info: chrome=87.0.4280.88)
+
+[05/Feb/2021 09:56:38.756 4126 ] ERROR [ui_logger:WebDriver_Wait.py:__web_element_wait:32] Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@placeholder="Name"]"}
+  (Session info: chrome=87.0.4280.88)
+
