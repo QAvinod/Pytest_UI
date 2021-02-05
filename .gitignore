@@ -3,5 +3,5 @@
 .idea/workspace.xml
 Scripts/geckodriver.log
 Config/config.ini
-logs/ui_automation.log
+Logs/ui_automation.log
 *.png

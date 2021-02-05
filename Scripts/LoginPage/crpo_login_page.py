@@ -1,22 +1,21 @@
-from Config import inputFile, Enviroment
+from Config import inputFile
 from utilities import excelRead, appTitle
 from pageObjects.Pages.Loginpage import Login
 
 
 class CRPOLogin:
-    def __init__(self):
+    def __init__(self, driver):
+        self.driver = driver
 
-        setup = Enviroment.EnvironmentSetup()
-        self.driver = setup.driver
         self.LoginPage = Login(self.driver)
         self.title = appTitle.Title(self.driver)
 
         """
         ----------------- EXCEL READ AND TO ASSIGN VALUES TO RESPECTIVE INIT VARIABLES ------>>>>
         """
-        excel = excelRead.ExcelRead()
-        excel.read(inputFile.INPUT_PATH['login_excel'], index=0)
-        xl = excel.excel_dict
+        login_excel = excelRead.ExcelRead()
+        login_excel.read(inputFile.INPUT_PATH['login_excel'], index=0)  # -- TODO
+        xl = login_excel.excel_dict
         self.xl_title = xl['c_title'][0]
         self.xl_tenant = xl['c_tenant'][0]
         self.xl_login = xl['c_login_name'][0]

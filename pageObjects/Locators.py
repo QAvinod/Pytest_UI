@@ -21,8 +21,20 @@ PLACEHOLDER = {
     'num_ph': '//input[@type="number"][@placeholder="{}"]'
 }
 
+TITLE = {
+    'title': '//*[@title="{}"]'
+}
+
 BUTTONS = {
-    '': ''
+    'button': "//button[text()='{}']",
+    'all_buttons': "//*[text()='{}']",
+}
+
+ACTIONS = {
+    'actions_click': '//*[@class="fa fa-caret-down"]',
+    'action': '',
+    'float_click_class': 'fa-angle-right',
+    'float_action': ''
 }
 
 LOGIN = {
