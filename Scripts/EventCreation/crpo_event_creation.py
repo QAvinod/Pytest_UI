@@ -2,7 +2,7 @@ import time
 
 from pytest import mark
 from selenium.webdriver.common.by import By
-import TestCases.LoginPage.crpo_login_page
+import Scripts.LoginPage.crpo_login_page
 from utilities.ReadConfigFile import ReadConfig
 
 

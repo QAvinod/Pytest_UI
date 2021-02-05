@@ -1,13 +1,9 @@
-import os
 import configparser
-
-# ----- Ubuntu -----
-PATH = os.getenv("HOME")
-CONFIG_FILE_PATH = "%s/PythonFrameWorkNew/Pytest_UI/Config/config.ini" % PATH
+from Config import CongfigFile
 
 
 config = configparser.RawConfigParser()
-config.read(CONFIG_FILE_PATH)
+config.read(CongfigFile.INI_FILE)
 
 
 class ReadConfig:
