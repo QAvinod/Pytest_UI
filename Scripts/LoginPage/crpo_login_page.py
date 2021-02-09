@@ -4,7 +4,7 @@ from pageObjects.Pages.Loginpage import Login
 
 
 class CRPOLogin:
-    def __init__(self, driver):
+    def __init__(self, driver, index):
         self.driver = driver
 
         self.LoginPage = Login(self.driver)
@@ -14,7 +14,7 @@ class CRPOLogin:
         ----------------- EXCEL READ AND TO ASSIGN VALUES TO RESPECTIVE INIT VARIABLES ------>>>>
         """
         login_excel = excelRead.ExcelRead()
-        login_excel.read(inputFile.INPUT_PATH['login_excel'], index=0)  # -- TODO
+        login_excel.read(inputFile.INPUT_PATH['login_excel'], index=index)
         xl = login_excel.excel_dict
         self.xl_title = xl['c_title'][0]
         self.xl_tenant = xl['c_tenant'][0]

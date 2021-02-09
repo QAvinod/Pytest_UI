@@ -4,7 +4,7 @@ from pageObjects.Pages.CreateJobPage import JobCreationPage
 
 
 class CRPOJobCreation:
-    def __init__(self, driver):
+    def __init__(self, driver, index, version):
         self.driver = driver
 
         self.job = JobCreationPage(self.driver)
@@ -14,9 +14,9 @@ class CRPOJobCreation:
         ----------------- EXCEL READ AND TO ASSIGN VALUES TO RESPECTIVE INIT VARIABLES ------>>>>
         """
         job_excel = excelRead.ExcelRead()
-        job_excel.read(inputFile.INPUT_PATH['job_excel'], index=0)  # -- TODO
+        job_excel.read(inputFile.INPUT_PATH['job_excel'], index=index)
         xl = job_excel.excel_dict
-        self.xl_job_name = xl['job_name'][0]  # -- TODO
+        self.xl_job_name = xl['job_name'][0].format(version)
         self.xl_job_desc = xl['job_description'][0]
         self.xl_job_loc = xl['job_location'][0]
         self.xl_job_hm = xl['job_hm'][0]

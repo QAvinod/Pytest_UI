@@ -15,4 +15,3 @@ class EnvironmentSetup:
             self.driver.get(ReadConfigFile.ReadConfig.get_qa_url())
         elif self.server == 'ams':
             self.driver.get(ReadConfigFile.ReadConfig.get_production_url())
-# -- TODO
