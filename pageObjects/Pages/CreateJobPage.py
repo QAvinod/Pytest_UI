@@ -30,7 +30,7 @@ class JobCreationPage:
         self.notifier = Notifier(self.driver)
 
     def job_tab(self, tab_name):
-        self.tab.menu_collection(tab_name)
+        self.tab.job_tab(tab_name)
         self.wait.loading()
 
     def create_button(self):

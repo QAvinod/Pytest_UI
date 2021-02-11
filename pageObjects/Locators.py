@@ -7,6 +7,10 @@ TAG = {
     'anchor': 'a'
 }
 
+MENU = {
+    'menu': "//a[contains(text(),'{}')]"
+}
+
 ATTACHMENT = {
     'file': '//input[@type="file"]'
 }

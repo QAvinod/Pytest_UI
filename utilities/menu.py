@@ -1,18 +1,29 @@
-import time
+from pageObjects import Locators
 from selenium.webdriver.common.by import By
 from utilities.WebDriver_Wait import WebElementWait
 
 
 class Menu:
+    __e_menu = Locators.MENU['menu']
+
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebElementWait(self.driver)
 
-    def menu_collection(self, user_name):
-        result = ''
-        self.wait.web_elements_wait(By.TAG_NAME, 'a')
-        for i in self.wait.perform:
-            if i.text.strip() == user_name:
-                i.click()
-                break
-        return result
+    def job_tab(self, job_menu_name):
+        self.wait.web_element_wait_click(By.XPATH, self.__e_menu.format(job_menu_name))
+
+    def requirement_tab(self, req_menu_name):
+        self.wait.web_element_wait_click(By.XPATH, self.__e_menu.format(req_menu_name))
+
+    def assessment_tab(self, assess_menu_name):
+        self.wait.web_element_wait_click(By.XPATH, self.__e_menu.format(assess_menu_name))
+
+    def event_tab(self, event_menu_name):
+        self.wait.web_element_wait_click(By.XPATH, self.__e_menu.format(event_menu_name))
+
+    def more_tab(self, more_menu_name):
+        self.wait.web_element_wait_click(By.XPATH, self.__e_menu.format(more_menu_name))
+
+    def embrace_tab(self, embrace_menu_name):
+        self.wait.web_element_wait_click(By.XPATH, self.__e_menu.format(embrace_menu_name))
