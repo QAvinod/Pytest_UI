@@ -1,4 +1,4 @@
-from Config import Enviroment
+from utilities import ExcelIndexVersion
 from Scripts.LoginPage.crpo_login_page import CRPOLogin
 from Scripts.JobCreation.crpo_job_creation import CRPOJobCreation
 from Scripts.JobCreation.crpo_job_configuration import CRPOJobConfiguration
@@ -6,18 +6,11 @@ from Scripts.JobCreation.crpo_job_configuration import CRPOJobConfiguration
 
 class CRPOE2ERegression:
 
-    """ Environment setup object with index / version instances
-    """
-    environment = Enviroment.EnvironmentSetup()
-    if environment.server == 'amsin':
-        index = 0
-        version = environment.sprint_version
-    else:
-        index = 1
-        version = environment.sprint_version
+    Excel_Index_version = ExcelIndexVersion.IndexVersion()
+    environment = Excel_Index_version.environment
+    index = Excel_Index_version.index
+    version = Excel_Index_version.version
 
-    """ Required class Objects are created 
-    """
     driver = environment.driver
     login = CRPOLogin(driver, index)
     job = CRPOJobCreation(driver, index, version)
@@ -35,6 +28,7 @@ class CRPOE2ERegression:
 
 o = CRPOE2ERegression()
 o.crpo_login()
-o.crpo_job()
-o.crpo_job_config()
-o.environment.close()
+if o.crpo_login():
+    o.crpo_job()
+    o.crpo_job_config()
+    o.Excel_Index_version.environment.close()
