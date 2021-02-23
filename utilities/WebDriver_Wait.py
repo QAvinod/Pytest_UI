@@ -32,8 +32,9 @@ class WebElementWait:
                 ui_logger.error(error)
                 time.sleep(1.5)
             attempts += 1
-            self.element_failure_image.screen_shot(f'{attempts}{element}')
         # print('Number of attempts = {}'.format(attempts))
+        if attempts == 10:
+            self.element_failure_image.screen_shot(f'{attempts}{element}')
         return result
 
     def web_elements_wait(self, by_locator, element):
@@ -48,8 +49,9 @@ class WebElementWait:
                 ui_logger.error(error)
                 time.sleep(1.5)
             attempts += 1
-            self.element_failure_image.screen_shot(f'{attempts}{element}')
         # print('Number of attempts = {}'.format(attempts))
+        if attempts == 10:
+            self.element_failure_image.screen_shot(f'{attempts}{element}')
         return result
 
     def loading(self):

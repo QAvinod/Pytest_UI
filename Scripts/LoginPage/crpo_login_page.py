@@ -31,6 +31,6 @@ class CRPOLogin:
         self.LoginPage.password(self.xl_password)
         self.LoginPage.login_button()
 
-        user = self.LoginPage.login_account_name_verification(self.xl_user)
+        self.LoginPage.login_account_name_verification(self.xl_user)
         print(f'{self.xl_user} logged in successfully')
         self.title.tab_title(self.xl_title)

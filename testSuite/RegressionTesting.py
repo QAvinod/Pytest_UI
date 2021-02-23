@@ -1,23 +1,42 @@
 from utilities import ExcelIndexVersion
+from Listeners.logger_settings import ui_logger
 from Scripts.LoginPage.crpo_login_page import CRPOLogin
 from Scripts.JobCreation.crpo_job_creation import CRPOJobCreation
 from Scripts.JobCreation.crpo_job_configuration import CRPOJobConfiguration
+from Scripts import E2EReport
 
 
 class CRPOE2ERegression:
+    """
+        Required class Objects are created
+    """
+    environment = ''
+    login_success = ''
 
-    Excel_Index_version = ExcelIndexVersion.IndexVersion()
-    environment = Excel_Index_version.environment
-    index = Excel_Index_version.index
-    version = Excel_Index_version.version
+    try:
+        Excel_Index_version = ExcelIndexVersion.IndexVersion()
+        environment = Excel_Index_version.environment
+        index = Excel_Index_version.index
+        version = Excel_Index_version.version
 
-    driver = environment.driver
-    login = CRPOLogin(driver, index)
-    job = CRPOJobCreation(driver, index, version)
-    job_config = CRPOJobConfiguration(driver, index, version)
+        driver = environment.driver
+
+        login = CRPOLogin(driver=driver, index=index)
+        job = CRPOJobCreation(driver=driver, index=index, version=version)
+        job_config = CRPOJobConfiguration(driver=driver, index=index, version=version)
+        E2E_output = E2EReport.E2EOutputReport(version=version)
+
+    except Exception as error:
+        ui_logger.error(error)
+        environment.close()
 
     def crpo_login(self):
-        self.login.crpo_login()
+        try:
+            self.login.crpo_login()
+            self.login_success = True
+
+        except Exception as error:
+            ui_logger.error(error)
 
     def crpo_job(self):
         self.job.crpo_job_creation()
@@ -26,9 +45,14 @@ class CRPOE2ERegression:
         self.job_config.crpo_job_configurations()
 
 
-o = CRPOE2ERegression()
-o.crpo_login()
-if o.crpo_login():
-    o.crpo_job()
-    o.crpo_job_config()
-    o.Excel_Index_version.environment.close()
+Object = CRPOE2ERegression()
+Object.crpo_login()
+
+if Object.login_success:
+    # Object.crpo_job()
+    # Object.crpo_job_config()
+    Object.E2E_output.dummy()
+    Object.E2E_output.overall_status(start_date_time=Object.environment.start_date_time,
+                                     version=Object.environment.sprint_version,
+                                     server=Object.environment.server)
+    Object.Excel_Index_version.environment.close()
