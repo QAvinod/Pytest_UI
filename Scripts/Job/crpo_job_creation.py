@@ -1,5 +1,5 @@
 from Config import inputFile
-from utilities import appTitle, excelRead
+from utilities import excelRead
 from pageObjects.Pages.CreateJobPage import JobCreationPage
 
 
@@ -8,7 +8,6 @@ class CRPOJobCreation:
         self.driver = driver
 
         self.job = JobCreationPage(self.driver)
-        self.tab_title = appTitle.Title(self.driver)
 
         """
         ----------------- EXCEL READ AND TO ASSIGN VALUES TO RESPECTIVE INIT VARIABLES ------>>>>
@@ -32,22 +31,28 @@ class CRPOJobCreation:
         # ---- Attachment from local machine
         self.job_attachment_file = inputFile.INPUT_PATH['job_attachment']
 
+        self.coll = []
+
     def crpo_job_creation(self):
-        self.job.job_tab(self.xl_job_menu)
 
-        assert self.tab_title.tab_title(self.xl_job_create_tab_title) == self.xl_job_create_tab_title, \
-            'Webdriver is in wrong tab'
-
-        self.job.create_button()
-        self.job.job_name(self.xl_job_name)
-        self.job.job_attachment(self.job_attachment_file)
-        self.job.job_notifier(self.xl_job_attach_message)
-        self.job.job_description(self.xl_job_desc)
-        self.job.job_location(self.xl_job_loc)
-        self.job.job_hiring_manager(self.xl_job_hm)
-        self.job.job_business_unit(self.xl_job_bu)
-        self.job.job_openings(self.xl_job_openings)
-        self.job.job_male_diversity(self.xl_job_male)
-        self.job.job_female_diversity(self.xl_job_female)
-        self.job.job_create()
-        self.job.job_notifier(self.xl_job_create_message)
+        __list = [self.job.job_tab(self.xl_job_menu, self.xl_job_create_tab_title),
+                  self.job.create_button(),
+                  self.job.job_name(self.xl_job_name),
+                  self.job.job_attachment(self.job_attachment_file),
+                  self.job.job_notifier(self.xl_job_attach_message),
+                  self.job.job_description(self.xl_job_desc),
+                  self.job.job_location(self.xl_job_loc),
+                  self.job.job_hiring_manager(self.xl_job_hm),
+                  self.job.job_business_unit(self.xl_job_bu),
+                  self.job.job_openings(self.xl_job_openings),
+                  self.job.job_male_diversity(self.xl_job_male),
+                  self.job.job_female_diversity(self.xl_job_female),
+                  self.job.job_create(),
+                  self.job.job_notifier(self.xl_job_create_message)
+                  ]
+        for func in __list:
+            if func:
+                self.coll.append(func)
+            else:
+                self.coll.append(func)
+        print(self.coll)

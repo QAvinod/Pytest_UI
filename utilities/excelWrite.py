@@ -36,7 +36,8 @@ class ExcelReportWrite(styles.FontColor):
 
     def common_result_pass(self, row, column, result_key):
         try:
-            if result_key == 'Pass':
+            if result_key:
+                result_key = 'Pass'
                 self.Actual_success_cases.append(result_key)
                 self.ws.write(row, column, 'Pass', self.style7)
             else:
@@ -52,7 +53,7 @@ class ExcelReportWrite(styles.FontColor):
             time_taken = end_date_time - start_date_time
             minutes = time_taken.total_seconds() / 60
 
-            self.ws.write(0, 0, 'MASS INTERVIEW FLOW', self.style4)
+            self.ws.write(0, 0, 'CRPO E2E FLOW', self.style4)
             if self.Expected_success_cases == self.Actual_success_cases:
                 self.ws.write(0, 1, 'Pass', self.style5)
             else:

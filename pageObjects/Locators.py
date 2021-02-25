@@ -41,6 +41,11 @@ ACTIONS = {
     'float_action': ''
 }
 
+SEARCH = {
+    'advance_search': 'cardlist-view-filter',
+    'name': 'Name'
+}
+
 LOGIN = {
     'alias': 'alias',
     'next': '.btn-default',
