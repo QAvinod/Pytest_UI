@@ -34,7 +34,7 @@ class ExcelReportWrite(styles.FontColor):
     def input_data_verification(self, row, column, input_key):
         self.ws.write(row, column, input_key)
 
-    def common_result_pass(self, row, column, result_key):
+    def common_result_pass(self, row, column, result_key, path):
         try:
             if result_key:
                 result_key = 'Pass'
@@ -42,10 +42,12 @@ class ExcelReportWrite(styles.FontColor):
                 self.ws.write(row, column, 'Pass', self.style7)
             else:
                 self.ws.write(row, column, 'Fail', self.style3)
+
+            self.wb_Result.save(path)
         except Exception as error:
             ui_logger.error(error)
 
-    def status(self, start_date_time, version, server):
+    def status(self, path, excel_save_name, start_date_time, version, server):
         try:
             failure_cases = len(self.Expected_success_cases) - len(self.Actual_success_cases)
             percentage = len(self.Actual_success_cases) * 100 / len(self.Expected_success_cases)
@@ -53,7 +55,7 @@ class ExcelReportWrite(styles.FontColor):
             time_taken = end_date_time - start_date_time
             minutes = time_taken.total_seconds() / 60
 
-            self.ws.write(0, 0, 'CRPO E2E FLOW', self.style4)
+            self.ws.write(0, 0, excel_save_name, self.style4)
             if self.Expected_success_cases == self.Actual_success_cases:
                 self.ws.write(0, 1, 'Pass', self.style5)
             else:
@@ -76,7 +78,7 @@ class ExcelReportWrite(styles.FontColor):
             self.ws.write(0, 13, percentage, self.style5)
             self.ws.write(0, 14, 'Time Taken (min)', self.style4)
             self.ws.write(0, 15, minutes, self.style5)
-            self.wb_Result.save(outputFile.OUTPUT_PATH['E2E_output'])
+            self.wb_Result.save(path)
 
         except Exception as error:
             ui_logger.error(error)

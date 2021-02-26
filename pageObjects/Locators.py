@@ -29,6 +29,10 @@ TITLE = {
     'title': '//*[@title="{}"]'
 }
 
+CHECKBOX = {
+    'check': 'grid_items'
+}
+
 BUTTONS = {
     'button': "//button[text()='{}']",
     'all_buttons': "//*[text()='{}']",
@@ -36,14 +40,16 @@ BUTTONS = {
 
 ACTIONS = {
     'actions_click': '//*[@class="fa fa-caret-down"]',
-    'action': '',
+    'view_candidates': 'Event-Details-View-Candidates',
+    'status_change': 'cardlist-view-Change-Applicant Status',
     'float_click_class': 'fa-angle-right',
     'float_action': ''
 }
 
 SEARCH = {
     'advance_search': 'cardlist-view-filter',
-    'name': 'Name'
+    'Name': 'Name',
+    'name': 'name'
 }
 
 LOGIN = {
@@ -59,4 +65,10 @@ JOB = {
     'description': '//*[@id="mainBodyElement"]/div[3]/section/div/basic-job/div/div'
                    '[2]/div[8]/div/wysiwyg-edit/div/div[2]/iframe',
     'openings': 'openings'
+}
+
+CHANGE_STATUS = {
+    'stage': '//*[@ng-model="vm.selectedStage"]',
+    'status': '//*[@ng-model="vm.selectedStatus"]',
+    'comment': '//*[@ng-model="vm.comments"]'
 }

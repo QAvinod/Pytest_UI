@@ -56,7 +56,7 @@ class JobCreationPage:
 
     def job_name(self, name):
         try:
-            self.wait.web_element_wait_send_keys(By.XPATH, self.__e_job_names, name)
+            self.wait.web_element_wait_send_keys(By.XPATH, self.__e_job_names, name, 'Job_name_field')
             return True
 
         except Exception as error:
@@ -64,7 +64,7 @@ class JobCreationPage:
 
     def job_attachment(self, file_path):
         try:
-            self.wait.web_element_wait_send_keys(By.XPATH, self.__e_file_path, file_path)
+            self.wait.web_element_wait_send_keys(By.XPATH, self.__e_file_path, file_path, 'Job_attachment')
             time.sleep(0.5)
             self.wait.uploading()
             return True
@@ -82,41 +82,41 @@ class JobCreationPage:
             ui_logger.error(error)
 
     def job_description(self, description):
-        self.wait.web_element_wait_send_keys(By.XPATH, self.__e_description, description)
+        self.wait.web_element_wait_send_keys(By.XPATH, self.__e_description, description, 'Job_description')
         self.wait.drop_down_selection()
         return True
 
     def job_location(self, location):
-        self.wait.web_element_wait_send_keys(By.XPATH, self.__e_location, location)
+        self.wait.web_element_wait_send_keys(By.XPATH, self.__e_location, location, 'Job_location_field')
         self.wait.drop_down_selection()
         return True
 
     def job_hiring_manager(self, hm):
-        self.wait.web_element_wait_send_keys(By.XPATH, self.__e_hm, hm)
+        self.wait.web_element_wait_send_keys(By.XPATH, self.__e_hm, hm, 'job_hm_field')
         self.wait.drop_down_selection()
         return True
 
     def job_business_unit(self, bu):
-        self.wait.web_element_wait_send_keys(By.XPATH, self.__e_bu, bu)
+        self.wait.web_element_wait_send_keys(By.XPATH, self.__e_bu, bu, 'Job_bu_field')
         self.wait.drop_down_selection()
         return True
 
     def job_openings(self, openings):
-        self.wait.clear(By.NAME, self.__e_openings)
-        self.wait.web_element_wait_send_keys(By.NAME, self.__e_openings, openings)
+        self.wait.clear(By.NAME, self.__e_openings, 'Job_openings_field')
+        self.wait.web_element_wait_send_keys(By.NAME, self.__e_openings, openings, 'Job_openings_field')
         return True
 
     def job_male_diversity(self, male_diversity):
-        self.wait.clear(By.XPATH, self.__e_male)
-        self.wait.web_element_wait_send_keys(By.XPATH, self.__e_male, male_diversity)
+        self.wait.clear(By.XPATH, self.__e_male, 'Job_male_field')
+        self.wait.web_element_wait_send_keys(By.XPATH, self.__e_male, male_diversity, 'Job_male_field')
         return True
 
     def job_female_diversity(self, female_diversity):
-        self.wait.clear(By.XPATH, self.__e_female)
-        self.wait.web_element_wait_send_keys(By.XPATH, self.__e_female, female_diversity)
+        self.wait.clear(By.XPATH, self.__e_female, 'Job_female_field')
+        self.wait.web_element_wait_send_keys(By.XPATH, self.__e_female, female_diversity, 'Job_female_field')
         return True
 
     def job_create(self):
-        self.wait.web_element_wait_click(By.XPATH, self.__e_create)
+        self.wait.web_element_wait_click(By.XPATH, self.__e_create, 'Job_create_button')
         time.sleep(1)
         return True

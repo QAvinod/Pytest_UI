@@ -20,20 +20,20 @@ class Login:
         self.wait = WebElementWait(self.driver)
 
     def tenant(self, tenant_name):
-        self.wait.web_element_wait_send_keys(By.NAME, self.__e_tenant_name, tenant_name)
+        self.wait.web_element_wait_send_keys(By.NAME, self.__e_tenant_name, tenant_name, 'login_tenant_field')
 
     def next_button(self):
-        self.wait.web_element_wait_click(By.CSS_SELECTOR, self.__e_next_button_css)
+        self.wait.web_element_wait_click(By.CSS_SELECTOR, self.__e_next_button_css, 'login_next_button')
 
     def login_name(self, login_name):
         time.sleep(1.5)
-        self.wait.web_element_wait_send_keys(By.NAME, self.__e_login_name_l, login_name)
+        self.wait.web_element_wait_send_keys(By.NAME, self.__e_login_name_l, login_name, 'login_name_field')
 
     def password(self, password):
-        self.wait.web_element_wait_send_keys(By.XPATH, self.__e_password_xpath, password)
+        self.wait.web_element_wait_send_keys(By.XPATH, self.__e_password_xpath, password, 'login_password_field')
 
     def login_button(self):
-        self.wait.web_element_wait_click(By.CLASS_NAME, self.__e_login_button_css)
+        self.wait.web_element_wait_click(By.CLASS_NAME, self.__e_login_button_css, 'login_button')
 
     def login_account_name_verification(self, user_name):
         self.wait.loading()

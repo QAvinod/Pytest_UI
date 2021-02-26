@@ -20,7 +20,7 @@ class WebElementWait:
         self.text_value = ''
         self.element_failure_image = FailureImage(self.driver)
 
-    def __web_element_wait(self, by_locator, element):
+    def __web_element_wait(self, by_locator, element, failure_name):
         result = False
         attempts = 0
         while attempts < 10:
@@ -34,7 +34,7 @@ class WebElementWait:
             attempts += 1
         # print('Number of attempts = {}'.format(attempts))
         if attempts == 10:
-            self.element_failure_image.screen_shot(f'{attempts}{element}')
+            self.element_failure_image.screen_shot(f'{attempts}_{failure_name}')
         return result
 
     def web_elements_wait(self, by_locator, element):
@@ -82,16 +82,16 @@ class WebElementWait:
                 break
         print('***--------->>> Uploading File Completed <<<---------***')
 
-    def web_element_wait_send_keys(self, by_locator, element, keys):
-        self.__web_element_wait(by_locator, element)
+    def web_element_wait_send_keys(self, by_locator, element, keys, failure_name):
+        self.__web_element_wait(by_locator, element, failure_name)
         self.perform.send_keys(keys)
 
-    def web_element_wait_click(self, by_locator, element):
-        self.__web_element_wait(by_locator, element)
+    def web_element_wait_click(self, by_locator, element, failure_name):
+        self.__web_element_wait(by_locator, element, failure_name)
         self.perform.click()
 
-    def web_element_wait_text(self, by_locator, element):
-        self.__web_element_wait(by_locator, element)
+    def web_element_wait_text(self, by_locator, element, failure_name):
+        self.__web_element_wait(by_locator, element, failure_name)
         self.text_value = self.perform.text
 
     def web_elements_wait_text(self, by_locator, element, value):
@@ -115,8 +115,8 @@ class WebElementWait:
                 break
         return button_name
 
-    def clear(self, by_locator, element):
-        self.__web_element_wait(by_locator, element)
+    def clear(self, by_locator, element, failure_name):
+        self.__web_element_wait(by_locator, element, failure_name)
         self.perform.clear()
 
     def drop_down_selection(self):

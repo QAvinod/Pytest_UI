@@ -31,6 +31,7 @@ class CRPOJobCreation:
         # ---- Attachment from local machine
         self.job_attachment_file = inputFile.INPUT_PATH['job_attachment']
 
+        # ---- Collection of all success items
         self.coll = []
 
     def crpo_job_creation(self):
