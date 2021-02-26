@@ -1,5 +1,5 @@
 from Config import inputFile
-from pageObjects.Pages import ChangeApplicantStatusPage, EventGetByNamePage, EventApplicantPage
+from pageObjects.Pages import AdvanceSearchPage, EventGetByNamePage, EventApplicantPage, CandidateDetailsPage
 from utilities import excelRead
 
 
@@ -7,9 +7,10 @@ class EventApplicant:
 
     def __init__(self, driver, index, version):
         self.driver = driver
-        self.search = ChangeApplicantStatusPage.ApplicantStatus(self.driver)
+        self.search = AdvanceSearchPage.Search(self.driver)
         self.getby = EventGetByNamePage.EventGetByName(self.driver)
         self.applicant_grid = EventApplicantPage.EventApplicant(self.driver)
+        self.candidate_details = CandidateDetailsPage.CandidateDetailsPage(self.driver)
 
         """
         ----------------- EXCEL READ AND TO ASSIGN VALUES TO RESPECTIVE INIT VARIABLES ------>>>>
@@ -23,18 +24,28 @@ class EventApplicant:
         self.xl_stage = xl['stage'][0]
         self.xl_status = xl['status'][0]
         self.xl_comment = xl['comment'][0]
+        self.xl_message = xl['message'][0]
 
         self.event_collection = []
+        self.event_action_collection = []
         self.applicant_collection = []
 
-    def event_transactions(self):
+    def event(self):
         __list = [self.search.event_tab(self.xl_menu_name, self.xl_tab_title),
                   self.search.advance_search(),
                   self.search.name_field(self.xl_event_name),
                   self.search.search_button(),
                   self.getby.event_name_click(),
-                  self.getby.event_name_validation(self.xl_event_name),
-                  self.getby.event_actions_click(),
+                  self.getby.event_name_validation(self.xl_event_name)
+                  ]
+        for func in __list:
+            if func:
+                self.event_collection.append(func)
+            else:
+                self.event_collection.append(func)
+
+    def event_actions(self):
+        __list = [self.getby.event_actions_click(),
                   self.getby.event_view_candidates()
                   ]
         for func in __list:
@@ -52,7 +63,9 @@ class EventApplicant:
                   self.applicant_grid.applicant_stage(self.xl_stage),
                   self.applicant_grid.applicant_status(self.xl_status),
                   self.applicant_grid.comment(self.xl_comment),
-                  self.applicant_grid.change_button()
+                  self.applicant_grid.change_button(),
+                  self.applicant_grid.applicant_get_name(self.xl_event_name, self.xl_message),
+                  self.candidate_details.candidate_status(self.xl_status)
                   ]
         for func in __list:
             if func:

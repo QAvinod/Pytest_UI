@@ -23,7 +23,7 @@ class JobCreationPage:
     __e_male = Locators.PLACEHOLDER['num_ph'].format('Male')
     __e_female = Locators.PLACEHOLDER['num_ph'].format('Female')
     __e_create = Locators.BUTTONS['button'].format('Create')
-    create_job_button_name = 'New Job Role'
+    create_job_button_name = 'New E2E_Regression Role'
 
     def __init__(self, driver):
         self.driver = driver

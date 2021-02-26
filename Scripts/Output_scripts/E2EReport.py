@@ -7,7 +7,7 @@ class E2EOutputReport:
         self.__path = outputFile.OUTPUT_PATH['Mass_Interview_output']
         self.job_create = job_result_keys
         test_cases = 13
-        excel_headers = ['Job Creation', 'Status']
+        excel_headers = ['E2E_Regression Creation', 'Status']
         color_headers = []
         self.xlw = excelWrite.ExcelReportWrite(version=version, test_cases=test_cases,
                                                excel_headers_list=excel_headers,
@@ -17,7 +17,7 @@ class E2EOutputReport:
         self.xlw.status(start_date_time=start_date_time, version=version, server=server, path=self.__path)
 
     def dummy(self):
-        self.xlw.input_data_verification(row=2, column=0, input_key='Job Tab')
+        self.xlw.input_data_verification(row=2, column=0, input_key='E2E_Regression Tab')
         self.xlw.input_data_verification(row=3, column=0, input_key='Create Button')
         self.xlw.input_data_verification(row=4, column=0, input_key='Name')
         self.xlw.input_data_verification(row=5, column=0, input_key='Attachment')

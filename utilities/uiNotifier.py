@@ -13,7 +13,7 @@ class Notifier:
         self.wait = WebElementWait(self.driver)
 
     def glowing_messages(self, ui_message):
-        self.wait.web_element_wait_text(By.CLASS_NAME, self.e_notifier)
+        self.wait.web_element_wait_text(By.CLASS_NAME, self.e_notifier, 'Glowing_message')
         message = self.wait.text_value
         if message == ui_message:
             print('**-------->>> Message/UI notifier validated successfully - {}'.format(message))
@@ -21,5 +21,5 @@ class Notifier:
             print('Message/UI notifier validation failed - {} <<<---------**'.format(message))
 
     def dismiss_message(self):
-        self.wait.web_element_wait_click(By.CLASS_NAME, self.e_dismiss)
+        self.wait.web_element_wait_click(By.CLASS_NAME, self.e_dismiss, 'Dismiss_message')
         print('***---------->>> Notifier closed')

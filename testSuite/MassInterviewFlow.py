@@ -2,7 +2,7 @@ from utilities import ExcelIndexVersion
 from Listeners.logger_settings import ui_logger
 from Scripts.Login.crpo_login_page import CRPOLogin
 from Scripts.Output_scripts import MassInterviewReport
-from Scripts.Event.crpo_event_transaction import EventApplicant
+from Scripts.MassInterview.crpo_event_change_applicant_status import EventApplicant
 
 
 class MassInterviewFlow:
@@ -38,11 +38,18 @@ class MassInterviewFlow:
             ui_logger.error(error)
 
     def applicant_status_change(self):
-        self.status.event_transactions()
-        self.status.event_applicant_grid()
+        self.status.event()
+        self.MASS_output.event_report()
 
-        self.MASS_output.event_transactions_report()
+        self.status.event_actions()
+        self.MASS_output.event_actions_report()
+
+        self.status.event_applicant_grid()
         self.MASS_output.event_applicant_report()
+
+    def slot_configuration(self):
+        self.status.event()
+        self.MASS_output.event_report()
 
 
 Object = MassInterviewFlow()

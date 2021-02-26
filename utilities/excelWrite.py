@@ -32,7 +32,7 @@ class ExcelReportWrite(styles.FontColor):
             index += 1
 
     def input_data_verification(self, row, column, input_key):
-        self.ws.write(row, column, input_key)
+        self.ws.write(row, column, input_key, self.style8)
 
     def common_result_pass(self, row, column, result_key, path):
         try:

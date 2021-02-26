@@ -33,7 +33,7 @@ class EventGetByName:
             self.wait.web_element_wait_text(By.XPATH,
                                             self.__e_event_name_xpath.format(event_name),
                                             'Event_name_validation')
-            print('Event Name -', self.wait.text_value)
+            print('MassInterview Name -', self.wait.text_value)
             time.sleep(2)
             self.wait.web_element_wait_click(By.XPATH,
                                              self.__e_event_name_xpath.format(event_name),
@@ -45,7 +45,7 @@ class EventGetByName:
     def event_actions_click(self):
         try:
             self.wait.web_element_wait_click(By.XPATH, self.__e_event_actions_xpath, 'Event_actions_click')
-            print('Event Actions - Clicked')
+            print('MassInterview Actions - Clicked')
             return True
         except Exception as error:
             ui_logger.error(error)
@@ -54,7 +54,7 @@ class EventGetByName:
         try:
             self.wait.web_element_wait_click(By.ID, self.__e_event_candidates_id, 'Event_candidates_action')
             self.wait.loading()
-            print('Event View Applicant - Screen')
+            print('MassInterview View Applicant - Screen')
             return True
         except Exception as error:
             ui_logger.error(error)

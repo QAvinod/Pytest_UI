@@ -1,8 +1,8 @@
 from utilities import ExcelIndexVersion
 from Listeners.logger_settings import ui_logger
 from Scripts.Login.crpo_login_page import CRPOLogin
-from Scripts.Job.crpo_job_creation import CRPOJobCreation
-from Scripts.Job.crpo_job_configuration import CRPOJobConfiguration
+from Scripts.E2E_Regression.crpo_job_creation import CRPOJobCreation
+from Scripts.E2E_Regression.crpo_job_configuration import CRPOJobConfiguration
 from Scripts.Output_scripts import E2EReport
 
 
