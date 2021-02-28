@@ -50,9 +50,9 @@ class EventApplicant:
                   ]
         for func in __list:
             if func:
-                self.event_collection.append(func)
+                self.event_action_collection.append(func)
             else:
-                self.event_collection.append(func)
+                self.event_action_collection.append(func)
 
     def event_applicant_grid(self):
         __list = [self.search.advance_search(),

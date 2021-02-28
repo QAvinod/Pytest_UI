@@ -20,6 +20,8 @@ class EnvironmentSetup:
             self.driver.get(ReadConfigFile.ReadConfig.get_production_url())
         elif self.server == 'beta':
             self.driver.get(ReadConfigFile.ReadConfig.get_beta_url())
+        elif self.server == 'stage':
+            self.driver.get(ReadConfigFile.ReadConfig.get_stage_url())
         elif self.server == 'india':
             self.driver.get(ReadConfigFile.ReadConfig.get_indiaams_url())
 

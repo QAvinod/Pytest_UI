@@ -24,6 +24,7 @@ class MassInterviewFlow:
 
         MASS_output = MassInterviewReport.MassInterviewOutputReport(version=version,
                                                                     event_coll=status.event_collection,
+                                                                    event_action_coll=status.event_action_collection,
                                                                     event_app_coll=status.applicant_collection)
 
     except Exception as error:
@@ -39,7 +40,7 @@ class MassInterviewFlow:
 
     def applicant_status_change(self):
         self.status.event()
-        self.MASS_output.event_report()
+        self.MASS_output.event_report(0, 1)
 
         self.status.event_actions()
         self.MASS_output.event_actions_report()
@@ -49,7 +50,7 @@ class MassInterviewFlow:
 
     def slot_configuration(self):
         self.status.event()
-        self.MASS_output.event_report()
+        self.MASS_output.event_report(4, 5)
 
 
 Object = MassInterviewFlow()

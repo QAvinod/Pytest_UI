@@ -17,6 +17,9 @@ class IndexVersion:
         elif environment.server == 'beta':
             index = 1
             version = environment.sprint_version
+        elif environment.server == 'stage':
+            index = 1
+            version = environment.sprint_version
         elif environment.server == 'india':
             index = 1
             version = environment.sprint_version

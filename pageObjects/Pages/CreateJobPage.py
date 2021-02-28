@@ -1,6 +1,6 @@
 import time
 from utilities import appTitle
-from utilities.menu import Menu
+from pageObjects.Pages.menuPage import Menu
 from pageObjects import Locators
 from utilities.uiNotifier import Notifier
 from selenium.webdriver.common.by import By
