@@ -36,11 +36,13 @@ CHECKBOX = {
 BUTTONS = {
     'button': "//button[text()='{}']",
     'all_buttons': "//*[text()='{}']",
+    'done': '//*[@ng-click="$hide();"]'
 }
 
 ACTIONS = {
     'actions_click': '//*[@class="fa fa-caret-down"]',
     'view_candidates': 'Event-Details-View-Candidates',
+    'slot_config': 'Event-Details-Configure-Interview-Slots',
     'status_change': 'cardlist-view-Change-Applicant Status',
     'float_click_class': 'fa-angle-right',
     'float_action': ''
@@ -50,6 +52,13 @@ SEARCH = {
     'advance_search': 'cardlist-view-filter',
     'Name': 'Name',
     'name': 'name'
+}
+
+MULTI_SELECTIONS = {
+    'moveSelectedItemsRight': '//*[@data-ng-click="vm.moveSelectedItemsRight();"]',
+    'moveAllItemsRight': '//*[@data-ng-click="vm.moveAllItemsRight();"]',
+    'moveSelectedItemsLeft': '//*[@data-ng-click="vm.moveSelectedItemsLeft();"]',
+    'moveAllItemsLeft': '//*[@data-ng-click="vm.moveAllItemsLeft();"]',
 }
 
 LOGIN = {

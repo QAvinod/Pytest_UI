@@ -7,6 +7,13 @@
     <orderEntry type="jdk" jdkName="Pytest3.7" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+  <component name="PyNamespacePackagesService">
+    <option name="namespacePackageFolders">
+      <list>
+        <option value="$MODULE_DIR$/pageObjects/Pages/SearchPages" />
+      </list>
+    </option>
+  </component>
   <component name="TestRunnerService">
     <option name="PROJECT_TEST_RUNNER" value="pytest" />
   </component>

@@ -1,6 +1,6 @@
 from Config import inputFile
 from utilities import excelRead
-from pageObjects.Pages.CreateJobPage import JobCreationPage
+from pageObjects.Pages.JobPages.CreateJobPage import JobCreationPage
 
 
 class CRPOJobCreation:

@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 
 from pageObjects import Locators
 from utilities.appTitle import Title
-from pageObjects.Pages.ActionsPage import Actions
+from pageObjects.Pages.EventActionsPage import Actions
 from utilities.WebDriver_Wait import WebElementWait
 
 

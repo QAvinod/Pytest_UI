@@ -1,6 +1,6 @@
 from Config import inputFile
 from utilities import excelRead, appTitle
-from pageObjects.Pages.JobConfigurationsPage import JobConfigurationPage
+from pageObjects.Pages.JobPages.JobConfigurationsPage import JobConfigurationPage
 
 
 class CRPOJobConfiguration:

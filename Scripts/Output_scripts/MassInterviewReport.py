@@ -3,14 +3,20 @@ from Config import outputFile
 
 
 class MassInterviewOutputReport:
-    def __init__(self, version, event_coll, event_action_coll, event_app_coll):
+    def __init__(self, version, event_coll, event_action_coll,
+                 event_app_coll, slot_coll, slot_config_coll):
         self.__path = outputFile.OUTPUT_PATH['Mass_Interview_output']
         self.event = event_coll
         self.event_action = event_action_coll
         self.applicant = event_app_coll
-        test_cases = 19
-        excel_headers = ['Event', 'Status', 'Applicant', 'Status']
-        color_headers = ['Event', 'Status', 'Applicant', 'Status']
+        self.slot_action = slot_coll
+        self.slot_config = slot_config_coll
+
+        test_cases = 50
+        excel_headers = ['Event (Change Status)', 'Status', 'Applicant', 'Status', 'Event (Slot Config)', 'Status',
+                         'Slot', 'Status']
+        color_headers = ['Event (Change Status)', 'Status', 'Applicant', 'Status', 'Event (Slot Config)', 'Status',
+                         'Slot', 'Status']
         self.xlw = excelWrite.ExcelReportWrite(version=version, test_cases=test_cases,
                                                excel_headers_list=excel_headers,
                                                color_headers_list=color_headers)
@@ -65,3 +71,23 @@ class MassInterviewOutputReport:
         self.xlw.common_result_pass(row=10, column=3, result_key=self.applicant[8], path=self.__path)
         self.xlw.common_result_pass(row=11, column=3, result_key=self.applicant[9], path=self.__path)
         self.xlw.common_result_pass(row=12, column=3, result_key=self.applicant[10], path=self.__path)
+
+    def slot_action_report(self):
+        self.xlw.input_data_verification(row=2, column=6, input_key='Event Actions')
+        self.xlw.input_data_verification(row=3, column=6, input_key='Event Slot Action')
+
+        self.xlw.common_result_pass(row=2, column=7, result_key=self.slot_action[0], path=self.__path)
+        self.xlw.common_result_pass(row=3, column=7, result_key=self.slot_action[1], path=self.__path)
+
+    def slot_config_report(self):
+        self.xlw.input_data_verification(row=4, column=6, input_key='Click to select stage')
+        self.xlw.input_data_verification(row=5, column=6, input_key='Entered Stage-Status')
+        self.xlw.input_data_verification(row=6, column=6, input_key='Go Button')
+        self.xlw.input_data_verification(row=7, column=6, input_key='Enter No.of Slots')
+        self.xlw.input_data_verification(row=8, column=6, input_key='Go Button')
+
+        self.xlw.common_result_pass(row=4, column=7, result_key=self.slot_config[0], path=self.__path)
+        self.xlw.common_result_pass(row=5, column=7, result_key=self.slot_config[1], path=self.__path)
+        self.xlw.common_result_pass(row=6, column=7, result_key=self.slot_config[2], path=self.__path)
+        self.xlw.common_result_pass(row=7, column=7, result_key=self.slot_config[3], path=self.__path)
+        self.xlw.common_result_pass(row=8, column=7, result_key=self.slot_config[4], path=self.__path)

@@ -1,6 +1,8 @@
 from Config import inputFile
-from pageObjects.Pages import AdvanceSearchPage, EventGetByNamePage, EventApplicantPage, CandidateDetailsPage
 from utilities import excelRead
+from pageObjects.Pages.SearchPages import AdvanceSearchPage
+from pageObjects.Pages.CandidatePages import CandidateDetailsPage
+from pageObjects.Pages.EventPages import EventGetByNamePage, EventApplicantPage, EventActionsPage
 
 
 class EventApplicant:
@@ -9,6 +11,7 @@ class EventApplicant:
         self.driver = driver
         self.search = AdvanceSearchPage.Search(self.driver)
         self.getby = EventGetByNamePage.EventGetByName(self.driver)
+        self.event_action = EventActionsPage.Actions(self.driver)
         self.applicant_grid = EventApplicantPage.EventApplicant(self.driver)
         self.candidate_details = CandidateDetailsPage.CandidateDetailsPage(self.driver)
 
@@ -45,8 +48,8 @@ class EventApplicant:
                 self.event_collection.append(func)
 
     def event_actions(self):
-        __list = [self.getby.event_actions_click(),
-                  self.getby.event_view_candidates()
+        __list = [self.event_action.event_actions_click(),
+                  self.event_action.event_view_candidates()
                   ]
         for func in __list:
             if func:
