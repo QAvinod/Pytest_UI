@@ -13,6 +13,9 @@ class EventSlot:
     __e_done_button_xpath = Locators.BUTTONS['done']
     __e_slot_number_xpath = Locators.PLACEHOLDER['num_ph'].format('No. Of Slots')
     __e_go_button_xpath = Locators.BUTTONS['button'].format('Go')
+    __e_date_field_xpath = Locators.PLACEHOLDER['place_holder'].format('From Date')
+    __e_time_field_xpath = Locators.PLACEHOLDER['place_holder'].format('From Time')
+    __e_count_field_xpath = Locators.PLACEHOLDER['num_ph'].format('Count')
 
     def __init__(self, driver):
         self.driver = driver
@@ -40,7 +43,6 @@ class EventSlot:
         try:
             self.wait.web_element_wait_send_keys(By.XPATH, self.__e_slot_number_xpath, number_of_slots,
                                                  'Entered_status')
-            self.wait.web_element_wait_click(By.XPATH, self.__e_go_button_xpath, 'Go_button')
             return True
         except Exception as error:
             ui_logger.error(error)
@@ -48,6 +50,34 @@ class EventSlot:
     def go_button(self):
         try:
             self.wait.web_element_wait_click(By.XPATH, self.__e_go_button_xpath, 'Go_button')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def date_field(self, date):
+        try:
+            self.wait.web_element_wait_send_keys(By.XPATH, self.__e_date_field_xpath, date, 'date_field')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def time_field(self, clock):
+        try:
+            self.wait.web_element_wait_send_keys(By.XPATH, self.__e_time_field_xpath, clock, 'time_field')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def count_field(self, count):
+        try:
+            self.wait.web_element_wait_send_keys(By.XPATH, self.__e_count_field_xpath, count, 'count_field')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def clear_time_field(self):
+        try:
+            self.wait.clear(By.XPATH, self.__e_time_field_xpath, 'clear_time_field')
             return True
         except Exception as error:
             ui_logger.error(error)

@@ -2,7 +2,7 @@ from utilities import excelWrite
 from Config import outputFile
 
 
-class MassInterviewOutputReport:
+class MassOutputReport:
     def __init__(self, version, event_coll, event_action_coll,
                  event_app_coll, slot_coll, slot_config_coll):
         self.__path = outputFile.OUTPUT_PATH['Mass_Interview_output']

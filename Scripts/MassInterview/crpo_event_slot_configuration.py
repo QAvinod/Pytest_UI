@@ -1,10 +1,15 @@
+from datetime import datetime
 from Config import inputFile
 from pageObjects.Pages.EventPages import EventActionsPage, EventSlotConfigurationPage
 from utilities import excelRead
 
 
 class SlotConfiguration:
-    def __init__(self, driver, index):
+    def __init__(self, driver, index, time):
+        now = datetime.now()
+        self.current_date = now.strftime("%d/%m/%Y")
+        self.time = time
+
         self.driver = driver
         self.slot = EventActionsPage.Actions(self.driver)
         self.slot_config = EventSlotConfigurationPage.EventSlot(self.driver)
@@ -17,6 +22,7 @@ class SlotConfiguration:
         xl = slot_excel.excel_dict
         self.xl_stage_status = xl['stage_status'][0]
         self.xl_number_of_slots = xl['number_of_slots'][0]
+        self.xl_count = xl['count'][0]
 
         self.event_slot_action_collection = []
         self.event_slot_collection = []
@@ -36,7 +42,11 @@ class SlotConfiguration:
                   self.slot_config.search_status_select(self.xl_stage_status),
                   self.slot_config.go_button(),
                   self.slot_config.slot_number(self.xl_number_of_slots),
-                  self.slot_config.go_button()
+                  self.slot_config.go_button(),
+                  self.slot_config.date_field(self.current_date),
+                  self.slot_config.count_field(self.xl_count),
+                  self.slot_config.clear_time_field(),
+                  self.slot_config.time_field(self.time)
                   ]
         for func in __list:
             if func:

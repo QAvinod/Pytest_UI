@@ -21,6 +21,7 @@ NOTIFIER = {
 }
 
 PLACEHOLDER = {
+    'place_holder': '//input[@placeholder="{}"]',
     'text_ph': '//input[@type="text"][@placeholder="{}"]',
     'num_ph': '//input[@type="number"][@placeholder="{}"]'
 }

@@ -16,14 +16,19 @@ class EnvironmentSetup:
 
         if self.server == 'qa':
             self.driver.get(ReadConfigFile.ReadConfig.get_qa_url())
+            self.index = 0
         elif self.server == 'dev':
             self.driver.get(ReadConfigFile.ReadConfig.get_production_url())
+            self.index = 1
         elif self.server == 'beta':
             self.driver.get(ReadConfigFile.ReadConfig.get_beta_url())
+            self.index = 1
         elif self.server == 'stage':
             self.driver.get(ReadConfigFile.ReadConfig.get_stage_url())
+            self.index = 1
         elif self.server == 'india':
             self.driver.get(ReadConfigFile.ReadConfig.get_indiaams_url())
+            self.index = 1
 
     def close(self):
         print("Run completed at:: " + str(datetime.datetime.now()))

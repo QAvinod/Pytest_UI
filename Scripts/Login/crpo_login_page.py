@@ -1,6 +1,6 @@
 from Config import inputFile
 from utilities import excelRead, appTitle
-from pageObjects.Pages.LoginPage import Login
+from pageObjects.Pages.LoginPages.LoginPage import Login
 
 
 class CRPOLogin:

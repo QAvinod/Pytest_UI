@@ -1,4 +1,4 @@
-from utilities import ExcelIndexVersion
+from Config import Enviroment
 from Listeners.logger_settings import ui_logger
 from Scripts.Login.crpo_login_page import CRPOLogin
 from Scripts.E2E_Regression.crpo_job_creation import CRPOJobCreation
@@ -14,12 +14,12 @@ class CRPOE2ERegression:
     login_success = ''
 
     try:
-        Excel_Index_version = ExcelIndexVersion.IndexVersion()
-        environment = Excel_Index_version.environment
-        index = Excel_Index_version.index
-        version = Excel_Index_version.version
-
+        environment = Enviroment.EnvironmentSetup()
         driver = environment.driver
+        index = environment.index
+        server = environment.server
+        version = environment.sprint_version
+        date_time = environment.start_date_time
 
         login = CRPOLogin(driver=driver, index=index)
         job = CRPOJobCreation(driver=driver, index=index, version=version)
@@ -53,7 +53,5 @@ if Object.login_success:
     Object.crpo_job()
     # Object.crpo_job_config()
     # Object.E2E_output.dummy()
-    Object.E2E_output.overall_status(start_date_time=Object.environment.start_date_time,
-                                     version=Object.environment.sprint_version,
-                                     server=Object.environment.server)
-    Object.Excel_Index_version.environment.close()
+    Object.E2E_output.overall_status(start_date_time=Object.date_time, version=Object.version, server=Object.server)
+    Object.environment.close()

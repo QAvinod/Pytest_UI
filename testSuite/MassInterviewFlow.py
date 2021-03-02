@@ -1,4 +1,4 @@
-from utilities import ExcelIndexVersion
+from Config import Enviroment
 from Listeners.logger_settings import ui_logger
 from Scripts.Login.crpo_login_page import CRPOLogin
 from Scripts.Output_scripts import MassInterviewReport
@@ -10,25 +10,27 @@ class MassInterviewFlow:
     """
         Required class Objects are created
     """
+    time = input('slot time (ex:- 10:10 AM) ::')
     environment = ''
     login_success = ''
 
     try:
-        Excel_Index_version = ExcelIndexVersion.IndexVersion()
-        environment = Excel_Index_version.environment
-        index = Excel_Index_version.index
-        version = Excel_Index_version.version
-
+        environment = Enviroment.EnvironmentSetup()
         driver = environment.driver
+        index = environment.index
+        server = environment.server
+        version = environment.sprint_version
+        date_time = environment.start_date_time
+
         login = CRPOLogin(driver=driver, index=index)
         status = EventApplicant(driver=driver, index=index, version=version)
-        slot = SlotConfiguration(driver=driver, index=index)
+        slot = SlotConfiguration(driver=driver, index=index, time=time)
 
-        MASS_output = MassInterviewReport.MassInterviewOutputReport(version=version, event_coll=status.event_collection,
-                                                                    event_action_coll=status.event_action_collection,
-                                                                    event_app_coll=status.applicant_collection,
-                                                                    slot_coll=slot.event_slot_action_collection,
-                                                                    slot_config_coll=slot.event_slot_collection)
+        MASS_output = MassInterviewReport.MassOutputReport(version=version, event_coll=status.event_collection,
+                                                           event_action_coll=status.event_action_collection,
+                                                           event_app_coll=status.applicant_collection,
+                                                           slot_coll=slot.event_slot_action_collection,
+                                                           slot_config_coll=slot.event_slot_collection)
 
     except Exception as error:
         ui_logger.error(error)
@@ -68,7 +70,5 @@ Object.crpo_login()
 if Object.login_success:
     Object.applicant_status_change()
     Object.slot_configuration()
-    Object.MASS_output.overall_status(start_date_time=Object.environment.start_date_time,
-                                      version=Object.environment.sprint_version,
-                                      server=Object.environment.server)
-    Object.Excel_Index_version.environment.close()
+    Object.MASS_output.overall_status(start_date_time=Object.date_time, version=Object.version, server=Object.server)
+    Object.environment.close()
