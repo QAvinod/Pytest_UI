@@ -24,21 +24,12 @@ class SlotConfiguration:
         self.xl_number_of_slots = xl['number_of_slots'][0]
         self.xl_count = xl['count'][0]
 
-        self.event_slot_action_collection = []
         self.event_slot_collection = []
 
-    def slot_action(self):
-        __list = [self.slot.event_actions_click(),
-                  self.slot.event_slot_configuration()
-                  ]
-        for func in __list:
-            if func:
-                self.event_slot_action_collection.append(func)
-            else:
-                self.event_slot_action_collection.append(func)
-
     def slot_configurations(self):
-        __list = [self.slot_config.current_applicant_status_choose(),
+        __list = [self.slot.event_actions_click(),
+                  self.slot.event_slot_configuration(),
+                  self.slot_config.current_applicant_status_choose(),
                   self.slot_config.search_status_select(self.xl_stage_status),
                   self.slot_config.go_button(),
                   self.slot_config.slot_number(self.xl_number_of_slots),
@@ -46,7 +37,10 @@ class SlotConfiguration:
                   self.slot_config.date_field(self.current_date),
                   self.slot_config.count_field(self.xl_count),
                   self.slot_config.clear_time_field(),
-                  self.slot_config.time_field(self.time)
+                  self.slot_config.time_field(self.time),
+                  self.slot_config.assign_slot_button(),
+                  self.slot_config.ok_button(),
+                  self.slot_config.ok_button()
                   ]
         for func in __list:
             if func:

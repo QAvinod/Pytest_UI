@@ -1,7 +1,6 @@
 import xlwt
 import datetime
 from datetime import date
-from Config import outputFile
 from utilities import styles
 from Listeners.logger_settings import ui_logger
 
@@ -31,19 +30,31 @@ class ExcelReportWrite(styles.FontColor):
                 self.ws.write(1, index, headers, self.style1)
             index += 1
 
-    def input_data_verification(self, row, column, input_key):
+    def __input_data_verification(self, row, column, input_key):
         self.ws.write(row, column, input_key, self.style8)
 
-    def common_result_pass(self, row, column, result_key, path):
+    def __common_result_pass(self, row, column, result_key, path):
         try:
-            if result_key:
+            if result_key is None:
+                self.ws.write(row, column, 'Fail', self.style3)
+            else:
                 result_key = 'Pass'
                 self.Actual_success_cases.append(result_key)
                 self.ws.write(row, column, 'Pass', self.style7)
-            else:
-                self.ws.write(row, column, 'Fail', self.style3)
 
             self.wb_Result.save(path)
+        except Exception as error:
+            ui_logger.error(error)
+
+    def input_output_report(self, testdata_headers, collection, i_column, o_column, path):
+        try:
+            row = 2
+            testdata_headers = testdata_headers
+            print(collection)
+            for loop in range(0, len(collection)):
+                self.__input_data_verification(row=row, column=i_column, input_key=testdata_headers[loop])
+                self.__common_result_pass(row=row, column=o_column, result_key=collection[loop], path=path)
+                row += 1
         except Exception as error:
             ui_logger.error(error)
 

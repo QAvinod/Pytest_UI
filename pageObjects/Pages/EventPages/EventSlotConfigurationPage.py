@@ -16,6 +16,8 @@ class EventSlot:
     __e_date_field_xpath = Locators.PLACEHOLDER['place_holder'].format('From Date')
     __e_time_field_xpath = Locators.PLACEHOLDER['place_holder'].format('From Time')
     __e_count_field_xpath = Locators.PLACEHOLDER['num_ph'].format('Count')
+    __e_assign_button_xpath = Locators.SLOT['assign']
+    __e_ok_button_xpath = Locators.BUTTONS['all_buttons'].format('OK')
 
     def __init__(self, driver):
         self.driver = driver
@@ -41,6 +43,7 @@ class EventSlot:
 
     def slot_number(self, number_of_slots):
         try:
+            time.sleep(1)
             self.wait.web_element_wait_send_keys(By.XPATH, self.__e_slot_number_xpath, number_of_slots,
                                                  'Entered_status')
             return True
@@ -78,6 +81,22 @@ class EventSlot:
     def clear_time_field(self):
         try:
             self.wait.clear(By.XPATH, self.__e_time_field_xpath, 'clear_time_field')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def assign_slot_button(self):
+        try:
+            self.wait.loading()
+            self.wait.web_element_wait_click(By.XPATH, self.__e_assign_button_xpath, 'assign_slot_button')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def ok_button(self):
+        try:
+            time.sleep(0.5)
+            self.wait.web_element_wait_click(By.XPATH, self.__e_ok_button_xpath, 'ok_button')
             return True
         except Exception as error:
             ui_logger.error(error)

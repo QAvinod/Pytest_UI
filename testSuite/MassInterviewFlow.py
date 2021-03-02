@@ -27,9 +27,7 @@ class MassInterviewFlow:
         slot = SlotConfiguration(driver=driver, index=index, time=time)
 
         MASS_output = MassInterviewReport.MassOutputReport(version=version, event_coll=status.event_collection,
-                                                           event_action_coll=status.event_action_collection,
                                                            event_app_coll=status.applicant_collection,
-                                                           slot_coll=slot.event_slot_action_collection,
                                                            slot_config_coll=slot.event_slot_collection)
 
     except Exception as error:
@@ -47,18 +45,12 @@ class MassInterviewFlow:
         self.status.event()
         self.MASS_output.event_report(0, 1)
 
-        self.status.event_actions()
-        self.MASS_output.event_actions_report()
-
         self.status.event_applicant_grid()
         self.MASS_output.event_applicant_report()
 
     def slot_configuration(self):
         self.status.event()
         self.MASS_output.event_report(4, 5)
-
-        self.slot.slot_action()
-        self.MASS_output.slot_action_report()
 
         self.slot.slot_configurations()
         self.MASS_output.slot_config_report()

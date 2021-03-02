@@ -82,3 +82,11 @@ CHANGE_STATUS = {
     'status': '//*[@ng-model="vm.selectedStatus"]',
     'comment': '//*[@ng-model="vm.comments"]'
 }
+
+CANDIDATE = {
+    'id': '//*[@id="mainBodyElement"]/div[3]/div/div[1]/div[1]/div/div/div[2]/div[2]/p[2]/span[2]'
+}
+
+SLOT = {
+    'assign': '//*[@bs-tooltip="{}"]'.format('Assign slots')
+}

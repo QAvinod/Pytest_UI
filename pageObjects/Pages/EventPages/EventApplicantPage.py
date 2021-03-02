@@ -80,7 +80,6 @@ class EventApplicant:
             self.wait.web_element_wait_click(By.XPATH, self.__e_applicant_name_xpath.format(applicant_name),
                                              'Applicant_Get_By_Name')
             print('Clicked on applicant name')
-            self.driver.switch_to.window(self.driver.window_handles[1])
             return True
         except Exception as error:
             ui_logger.error(error)

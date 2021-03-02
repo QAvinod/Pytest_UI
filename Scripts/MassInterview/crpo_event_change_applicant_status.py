@@ -1,5 +1,5 @@
 from Config import inputFile
-from utilities import excelRead
+from utilities import excelRead, SwitchWindow
 from pageObjects.Pages.SearchPages import AdvanceSearchPage
 from pageObjects.Pages.CandidatePages import CandidateDetailsPage
 from pageObjects.Pages.EventPages import EventGetByNamePage, EventApplicantPage, EventActionsPage
@@ -14,7 +14,7 @@ class EventApplicant:
         self.event_action = EventActionsPage.Actions(self.driver)
         self.applicant_grid = EventApplicantPage.EventApplicant(self.driver)
         self.candidate_details = CandidateDetailsPage.CandidateDetailsPage(self.driver)
-
+        self.window_switch = SwitchWindow.SwitchWindowClose(self.driver)
         """
         ----------------- EXCEL READ AND TO ASSIGN VALUES TO RESPECTIVE INIT VARIABLES ------>>>>
         """
@@ -30,7 +30,6 @@ class EventApplicant:
         self.xl_message = xl['message'][0]
 
         self.event_collection = []
-        self.event_action_collection = []
         self.applicant_collection = []
 
     def event(self):
@@ -47,18 +46,10 @@ class EventApplicant:
             else:
                 self.event_collection.append(func)
 
-    def event_actions(self):
-        __list = [self.event_action.event_actions_click(),
-                  self.event_action.event_view_candidates()
-                  ]
-        for func in __list:
-            if func:
-                self.event_action_collection.append(func)
-            else:
-                self.event_action_collection.append(func)
-
     def event_applicant_grid(self):
-        __list = [self.search.advance_search(),
+        __list = [self.event_action.event_actions_click(),
+                  self.event_action.event_view_candidates(),
+                  self.search.advance_search(),
                   self.search.name_field_applicant(self.xl_event_name),
                   self.search.search_button(),
                   self.applicant_grid.select_applicant(),
@@ -68,7 +59,11 @@ class EventApplicant:
                   self.applicant_grid.comment(self.xl_comment),
                   self.applicant_grid.change_button(),
                   self.applicant_grid.applicant_get_name(self.xl_event_name, self.xl_message),
-                  self.candidate_details.candidate_status(self.xl_status)
+                  self.window_switch.switch_to_window(1),
+                  self.candidate_details.candidate_status(self.xl_status),
+                  self.candidate_details.candidate_id_copy(),
+                  self.window_switch.window_close(),
+                  self.window_switch.switch_to_window(0)
                   ]
         for func in __list:
             if func:
