@@ -1,5 +1,5 @@
 import time
-from utilities import appTitle
+from utilities import appTitle, PageScroll
 from pageObjects.Pages.MenuPages.menuPage import Menu
 from pageObjects import Locators
 from selenium.webdriver.common.by import By
@@ -18,6 +18,7 @@ class Search:
         self.wait = WebElementWait(self.driver)
         self.tab = Menu(self.driver)
         self.tab_title = appTitle.Title(self.driver)
+        self.page_scroll = PageScroll.PageScroll(self.driver)
 
     def event_tab(self, tab_name, tab_title):
         try:
@@ -30,7 +31,7 @@ class Search:
 
     def advance_search(self):
         try:
-            self.driver.execute_script("window.scrollTo(0,-200);")
+            self.page_scroll.down(0, -200)
             self.wait.web_element_wait_click(By.ID, self.__e_search_id, 'advance_search')
             return True
         except Exception as error:
@@ -53,7 +54,8 @@ class Search:
     def search_button(self):
         try:
             time.sleep(2)
-            self.driver.execute_script("window.scrollTo(0,300);")
+            self.page_scroll.up(0, 300)
+            # self.driver.execute_script("window.scrollTo(0,300);")
             self.wait.web_element_wait_click(By.XPATH, self.__e_search_btn_xpath, 'search_button')
             return True
         except Exception as error:

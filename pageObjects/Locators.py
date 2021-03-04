@@ -4,7 +4,9 @@ LOADING = {
 }
 
 TAG = {
-    'anchor': 'a'
+    'anchor': 'a',
+    'h4': 'h4',
+    'href': 'href'
 }
 
 MENU = {
@@ -88,5 +90,5 @@ CANDIDATE = {
 }
 
 SLOT = {
-    'assign': '//*[@bs-tooltip="{}"]'.format('Assign slots')
+    'assign': '//*[@bs-tooltip="{}{}{}"]'.format("'", 'Assign slots', "'")
 }

@@ -9,7 +9,7 @@ class MassOutputReport:
         self.applicant = event_app_coll
         self.slot_config = slot_config_coll
 
-        test_cases = 42
+        test_cases = 50
         excel_headers = ['Event', 'Status', 'Applicant (Change Status)', 'Status', 'Event (Slot Config)', 'Status',
                          'Slot', 'Status']
         color_headers = ['Event', 'Status', 'Applicant (Change Status)', 'Status', 'Event (Slot Config)', 'Status',
@@ -41,6 +41,6 @@ class MassOutputReport:
         testdata_headers = ['Event Actions', 'Event Slot Action', 'Click to select stage', 'Entered Stage-Status',
                             'Go Button', 'Enter No.of Slots', 'Go Button', 'Date Field', 'Count Field',
                             'Clear time Field', 'Enter time Field', 'Assign slot button', 'Assign slot - Ok',
-                            'Communicate slot - Ok']
+                            'Communicate slot - Ok', 'Search Id', 'Search Button', 'Link action', 'LoginLink - Copied']
         self.xlw.input_output_report(testdata_headers=testdata_headers, collection=self.slot_config,
                                      i_column=6, o_column=7, path=self.__path)

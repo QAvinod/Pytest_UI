@@ -1,7 +1,7 @@
-from datetime import datetime
 from Config import inputFile
-from pageObjects.Pages.EventPages import EventActionsPage, EventSlotConfigurationPage
+from datetime import datetime
 from utilities import excelRead
+from pageObjects.Pages.EventPages import EventActionsPage, EventSlotConfigurationPage
 
 
 class SlotConfiguration:
@@ -26,7 +26,7 @@ class SlotConfiguration:
 
         self.event_slot_collection = []
 
-    def slot_configurations(self):
+    def slot_configurations(self, candidate_id):
         __list = [self.slot.event_actions_click(),
                   self.slot.event_slot_configuration(),
                   self.slot_config.current_applicant_status_choose(),
@@ -40,7 +40,11 @@ class SlotConfiguration:
                   self.slot_config.time_field(self.time),
                   self.slot_config.assign_slot_button(),
                   self.slot_config.ok_button(),
-                  self.slot_config.ok_button()
+                  self.slot_config.ok_button(),
+                  self.slot_config.search_id(candidate_id),
+                  self.slot_config.search_button(),
+                  self.slot_config.login_link_action(),
+                  self.slot_config.copy_candidate_login_link(candidate_id)
                   ]
         for func in __list:
             if func:

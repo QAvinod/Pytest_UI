@@ -52,7 +52,7 @@ class MassInterviewFlow:
         self.status.event()
         self.MASS_output.event_report(4, 5)
 
-        self.slot.slot_configurations()
+        self.slot.slot_configurations('')
         self.MASS_output.slot_config_report()
 
 

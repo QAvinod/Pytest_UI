@@ -1,4 +1,5 @@
 import time
+from utilities import PageScroll
 from pageObjects import Locators
 from selenium.webdriver.common.by import By
 from Listeners.logger_settings import ui_logger
@@ -18,10 +19,19 @@ class EventSlot:
     __e_count_field_xpath = Locators.PLACEHOLDER['num_ph'].format('Count')
     __e_assign_button_xpath = Locators.SLOT['assign']
     __e_ok_button_xpath = Locators.BUTTONS['all_buttons'].format('OK')
+    __e_candidate_id_xpath = Locators.PLACEHOLDER['place_holder'].format('Candidate Id(s) (Eg: 1234, 2312,...)')
+    __e_search_button_xpath = Locators.BUTTONS['button'].format(' Search')
+    __e_login_link_xpath = Locators.TITLE['title'].format('View Interview Lobby Link')
+    __e_header_tag = Locators.TAG['h4']
+    __e_anchor_tag = Locators.TAG['anchor']
+    __e_href_tag = Locators.TAG['href']
 
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebElementWait(self.driver)
+        self.page_scroll = PageScroll.PageScroll(self.driver)
+
+        self.candidate_login_link = ''
 
     def current_applicant_status_choose(self):
         try:
@@ -95,8 +105,48 @@ class EventSlot:
 
     def ok_button(self):
         try:
-            time.sleep(0.5)
+            self.wait.loading()
             self.wait.web_element_wait_click(By.XPATH, self.__e_ok_button_xpath, 'ok_button')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def search_id(self, candidate_id):
+        try:
+            self.wait.loading()
+            self.wait.web_element_wait_send_keys(By.XPATH, self.__e_candidate_id_xpath,
+                                                 candidate_id, 'candidate_id_field')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def search_button(self):
+        try:
+            self.wait.web_element_wait_click(By.XPATH, self.__e_search_button_xpath, 'search_button')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def login_link_action(self):
+        try:
+            time.sleep(1)
+            self.page_scroll.down(0, -600)
+            self.wait.web_element_wait_click(By.XPATH, self.__e_login_link_xpath, 'Copy_login_link_action')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def copy_candidate_login_link(self, candidate_id):
+        try:
+            time.sleep(2)
+            self.wait.web_element_wait_click(By.TAG_NAME, self.__e_header_tag, 'Link_Block')
+            self.wait.web_elements_wait(By.TAG_NAME, self.__e_anchor_tag)
+            lists = self.wait.perform
+            for i in lists:
+                if i.get_attribute(self.__e_href_tag) is not None:
+                    if candidate_id in i.get_attribute(self.__e_href_tag):
+                        self.candidate_login_link = i.get_attribute(self.__e_href_tag)
+                        print(f'candidate login link - {self.candidate_login_link}')
             return True
         except Exception as error:
             ui_logger.error(error)
