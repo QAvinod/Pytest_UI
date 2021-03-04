@@ -130,7 +130,7 @@ class EventSlot:
     def login_link_action(self):
         try:
             time.sleep(1)
-            self.page_scroll.down(0, -600)
+            self.page_scroll.down(0, -100)
             self.wait.web_element_wait_click(By.XPATH, self.__e_login_link_xpath, 'Copy_login_link_action')
             return True
         except Exception as error:
@@ -140,6 +140,7 @@ class EventSlot:
         try:
             time.sleep(2)
             self.wait.web_element_wait_click(By.TAG_NAME, self.__e_header_tag, 'Link_Block')
+            time.sleep(1.5)
             self.wait.web_elements_wait(By.TAG_NAME, self.__e_anchor_tag)
             lists = self.wait.perform
             for i in lists:

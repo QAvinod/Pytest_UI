@@ -33,6 +33,7 @@ class EventApplicant:
         self.applicant_collection = []
 
     def event(self):
+        self.event_collection = []
         __list = [self.search.event_tab(self.xl_menu_name, self.xl_tab_title),
                   self.search.advance_search(),
                   self.search.name_field(self.xl_event_name),

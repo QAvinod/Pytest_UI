@@ -1,6 +1,8 @@
-from Listeners.logger_settings import ui_logger
+import time
 from pageObjects import Locators
 from selenium.webdriver.common.by import By
+from utilities.PageScroll import PageScroll
+from Listeners.logger_settings import ui_logger
 from utilities.WebDriver_Wait import WebElementWait
 
 
@@ -13,9 +15,11 @@ class Actions:
         self.driver = driver
 
         self.wait = WebElementWait(self.driver)
+        self.scroll = PageScroll(self.driver)
 
     def event_actions_click(self):
         try:
+            self.scroll.up(0, 100)
             self.wait.web_element_wait_click(By.XPATH, self.__e_event_actions_xpath, 'Event_actions_click')
             print('Event Actions - Clicked')
             return True

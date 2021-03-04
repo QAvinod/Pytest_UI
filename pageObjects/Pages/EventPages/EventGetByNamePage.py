@@ -27,7 +27,6 @@ class EventGetByName:
 
     def event_name_validation(self, event_name):
         try:
-            time.sleep(1)
             self.wait.web_element_wait_text(By.XPATH,
                                             self.__e_event_name_xpath.format(event_name),
                                             'Event_name_validation')

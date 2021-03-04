@@ -43,7 +43,7 @@ BUTTONS = {
 }
 
 ACTIONS = {
-    'actions_click': '//*[@class="fa fa-caret-down"]',
+    'actions_click': "//span[contains(text(),'Actions')]",
     'view_candidates': 'Event-Details-View-Candidates',
     'slot_config': 'Event-Details-Configure-Interview-Slots',
     'status_change': 'cardlist-view-Change-Applicant Status',

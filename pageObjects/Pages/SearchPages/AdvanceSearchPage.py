@@ -55,7 +55,6 @@ class Search:
         try:
             time.sleep(2)
             self.page_scroll.up(0, 300)
-            # self.driver.execute_script("window.scrollTo(0,300);")
             self.wait.web_element_wait_click(By.XPATH, self.__e_search_btn_xpath, 'search_button')
             return True
         except Exception as error:
