@@ -19,6 +19,7 @@ class EventSlot:
     __e_count_field_xpath = Locators.PLACEHOLDER['num_ph'].format('Count')
     __e_assign_button_xpath = Locators.SLOT['assign']
     __e_ok_button_xpath = Locators.BUTTONS['all_buttons'].format('OK')
+    __e_cancel_button_xpath = Locators.BUTTONS['all_buttons'].format('CANCEL')
     __e_candidate_id_xpath = Locators.PLACEHOLDER['place_holder'].format('Candidate Id(s) (Eg: 1234, 2312,...)')
     __e_search_button_xpath = Locators.BUTTONS['button'].format(' Search')
     __e_login_link_xpath = Locators.TITLE['title'].format('View Interview Lobby Link')
@@ -148,6 +149,13 @@ class EventSlot:
                     if candidate_id in i.get_attribute(self.__e_href_tag):
                         self.candidate_login_link = i.get_attribute(self.__e_href_tag)
                         print(f'candidate login link - {self.candidate_login_link}')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def cancel_button(self):
+        try:
+            self.wait.web_element_wait_click(By.XPATH, self.__e_cancel_button_xpath, 'link_cancel_button')
             return True
         except Exception as error:
             ui_logger.error(error)

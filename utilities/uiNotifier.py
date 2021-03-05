@@ -1,5 +1,4 @@
 from selenium.webdriver.common.by import By
-
 from pageObjects import Locators
 from utilities.WebDriver_Wait import WebElementWait
 

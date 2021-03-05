@@ -2,6 +2,7 @@ import datetime
 from selenium import webdriver
 from utilities import ReadConfigFile
 from webdriver_manager.chrome import ChromeDriverManager
+from Listeners.logger_settings import ui_logger
 
 
 class EnvironmentSetup:
@@ -31,5 +32,8 @@ class EnvironmentSetup:
             self.index = 1
 
     def close(self):
-        print("Run completed at:: " + str(datetime.datetime.now()))
-        self.driver.close()
+        try:
+            print("Run completed at:: " + str(datetime.datetime.now()))
+            self.driver.close()
+        except Exception as error:
+            ui_logger.error(error)

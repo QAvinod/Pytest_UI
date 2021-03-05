@@ -39,7 +39,8 @@ CHECKBOX = {
 BUTTONS = {
     'button': "//button[text()='{}']",
     'all_buttons': "//*[text()='{}']",
-    'done': '//*[@ng-click="$hide();"]'
+    'done': '//*[@ng-click="$hide();"]',
+    'radio': 'label.btn-default'
 }
 
 ACTIONS = {
@@ -77,6 +78,11 @@ JOB = {
     'description': '//*[@id="mainBodyElement"]/div[3]/section/div/basic-job/div/div'
                    '[2]/div[8]/div/wysiwyg-edit/div/div[2]/iframe',
     'openings': 'openings'
+}
+
+EVENT = {
+    'configurations': '//*[@ui-sref="crpo.events.details.configurations"]',
+    'owners': '//*[@crpo.events.details.owners]',
 }
 
 CHANGE_STATUS = {

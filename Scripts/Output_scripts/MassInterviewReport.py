@@ -8,11 +8,11 @@ class MassOutputReport:
         self.server = server
         self.start_date_time = start_date_time
         self.__path = outputFile.OUTPUT_PATH['Mass_Interview_output']
-        test_cases = 50
+        test_cases = 60
         excel_headers = ['Event', 'Status', 'Applicant (Change Status)', 'Status', 'Event (Slot Config)', 'Status',
-                         'Slot', 'Status']
-        color_headers = ['Event', 'Status', 'Applicant (Change Status)', 'Status', 'Event (Slot Config)', 'Status',
-                         'Slot', 'Status']
+                         'Configurations (Auto Allocation)', 'Status', 'Slot', 'Status']
+        color_headers = ['Event', 'Applicant (Change Status)', 'Event (Slot Config)',
+                         'Configurations (Auto Allocation)', 'Slot', 'Status']
         self.xlw = excelWrite.ExcelReportWrite(version=version, test_cases=test_cases,
                                                excel_headers_list=excel_headers,
                                                color_headers_list=color_headers)
@@ -36,10 +36,16 @@ class MassOutputReport:
         self.xlw.input_output_report(testdata_headers=testdata_headers, collection=event_app_coll,
                                      i_column=2, o_column=3, path=self.__path)
 
+    def auto_allocation_report(self, auto_allocation_coll):
+        testdata_headers = ['Configurations Tab', 'Allocation - On', 'Chat - Click', 'Search chat user', 'Enable chat',
+                            'Save Button']
+        self.xlw.input_output_report(testdata_headers=testdata_headers, collection=auto_allocation_coll,
+                                     i_column=6, o_column=7, path=self.__path)
+
     def slot_config_report(self, slot_config_coll):
         testdata_headers = ['Event Actions', 'Event Slot Action', 'Click to select stage', 'Entered Stage-Status',
                             'Go Button', 'Enter No.of Slots', 'Go Button', 'Date Field', 'Count Field',
                             'Clear time Field', 'Enter time Field', 'Assign slot button', 'Assign slot - Ok',
                             'Communicate slot - Ok', 'Search Id', 'Search Button', 'Link action', 'LoginLink - Copied']
         self.xlw.input_output_report(testdata_headers=testdata_headers, collection=slot_config_coll,
-                                     i_column=6, o_column=7, path=self.__path)
+                                     i_column=8, o_column=9, path=self.__path)

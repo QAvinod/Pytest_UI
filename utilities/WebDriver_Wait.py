@@ -106,13 +106,23 @@ class WebElementWait:
 
     def web_elements_wait_click(self, by_locator, element, value):
         button_name = ''
-        time.sleep(2)
+        time.sleep(1)
         self.web_elements_wait(by_locator, element)
         for i in self.perform:
-            if i.text.strip() == value:
+            if i.text.strip() == value.strip():
                 button_name = i.text.strip()
                 i.click()
                 break
+        return button_name
+
+    def web_elements_wait_multiple_click(self, by_locator, element, value):
+        button_name = ''
+        self.web_elements_wait(by_locator, element)
+        for i in self.perform:
+            if i.text.strip() == value.strip():
+                button_name = i.text.strip()
+                i.click()
+                time.sleep(2)
         return button_name
 
     def clear(self, by_locator, element, failure_name):

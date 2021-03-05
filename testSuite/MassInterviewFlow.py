@@ -2,6 +2,7 @@ from Config import Enviroment
 from Listeners.logger_settings import ui_logger
 from Scripts.Login.crpo_login_page import CRPOLogin
 from Scripts.Output_scripts import MassInterviewReport
+from Scripts.MassInterview.crpo_enable_auto_assign import EnableAutoAssign
 from Scripts.MassInterview.crpo_event_change_applicant_status import EventApplicant
 from Scripts.MassInterview.crpo_event_slot_configuration import SlotConfiguration
 
@@ -29,6 +30,7 @@ class MassInterviewFlow:
         login = CRPOLogin(driver=driver, index=index)
         status = EventApplicant(driver=driver, index=index, version=version)
         slot = SlotConfiguration(driver=driver, index=index, time=time)
+        allocation = EnableAutoAssign(driver=driver, index=index)
 
         MASS_OUTPUT = MassInterviewReport.MassOutputReport(version=version, server=server, start_date_time=date_time)
 
@@ -51,10 +53,14 @@ class MassInterviewFlow:
         self.id = self.status.candidate_details.candidate_id
         self.MASS_OUTPUT.event_applicant_report(self.status.applicant_collection)
 
-    def slot_configuration(self):
+    def auto_allocation_configuration(self):
         self.status.event()
-        self.MASS_OUTPUT.event_report(4, 5,  self.status.event_collection)
+        self.MASS_OUTPUT.event_report(4, 5, self.status.event_collection)
 
+        self.allocation.auto_allocation_user_chat()
+        self.MASS_OUTPUT.auto_allocation_report(self.allocation.event_config_collection)
+
+    def slot_configuration(self):
         self.slot.slot_configurations(self.id)
         self.MASS_OUTPUT.slot_config_report(self.slot.event_slot_collection)
 
@@ -64,6 +70,7 @@ Object.crpo_login()
 
 if Object.login_success:
     Object.applicant_status_change()
+    Object.auto_allocation_configuration()
     Object.slot_configuration()
     Object.MASS_OUTPUT.overall_status()
     Object.environment.close()
