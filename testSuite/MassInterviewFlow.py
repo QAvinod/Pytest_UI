@@ -5,6 +5,8 @@ from Scripts.Output_scripts import MassInterviewReport
 from Scripts.MassInterview.crpo_enable_auto_assign import EnableAutoAssign
 from Scripts.MassInterview.crpo_event_change_applicant_status import EventApplicant
 from Scripts.MassInterview.crpo_event_slot_configuration import SlotConfiguration
+from Scripts.MassInterview.crpo_candidate_login import CandidateLobbyLogin
+from Scripts.MassInterview.crpo_room_create import Room
 
 
 class MassInterviewFlow:
@@ -14,6 +16,7 @@ class MassInterviewFlow:
     time = input('slot time (ex:- 10:10 AM) ::')
     environment = ''
     login_success = ''
+    login_link = ''
     id = ''
 
     """
@@ -31,6 +34,8 @@ class MassInterviewFlow:
         status = EventApplicant(driver=driver, index=index, version=version)
         slot = SlotConfiguration(driver=driver, index=index, time=time)
         allocation = EnableAutoAssign(driver=driver, index=index)
+        room = Room(driver=driver, index=index, version=version)
+        candidate = CandidateLobbyLogin(driver=driver)
 
         MASS_OUTPUT = MassInterviewReport.MassOutputReport(version=version, server=server, start_date_time=date_time)
 
@@ -62,7 +67,15 @@ class MassInterviewFlow:
 
     def slot_configuration(self):
         self.slot.slot_configurations(self.id)
+        self.login_link = self.slot.slot_config.candidate_login_link
         self.MASS_OUTPUT.slot_config_report(self.slot.event_slot_collection)
+
+    def room_creation(self):
+        self.room.create_room()
+        self.MASS_OUTPUT.create_room_report(self.room.room_collection)
+
+    def candidate_lobby(self):
+        self.candidate.candidate_lobby_login(self.id)
 
 
 Object = MassInterviewFlow()
@@ -72,5 +85,6 @@ if Object.login_success:
     Object.applicant_status_change()
     Object.auto_allocation_configuration()
     Object.slot_configuration()
+    Object.room_creation()
     Object.MASS_OUTPUT.overall_status()
     Object.environment.close()

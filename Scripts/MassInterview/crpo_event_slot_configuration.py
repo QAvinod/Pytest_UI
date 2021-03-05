@@ -44,7 +44,8 @@ class SlotConfiguration:
                   self.slot_config.search_id(candidate_id),
                   self.slot_config.search_button(),
                   self.slot_config.login_link_action(),
-                  self.slot_config.copy_candidate_login_link(candidate_id)
+                  self.slot_config.copy_candidate_login_link(candidate_id),
+                  self.slot_config.cancel_button()
                   ]
         for func in __list:
             if func:

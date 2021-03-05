@@ -48,6 +48,7 @@ ACTIONS = {
     'view_candidates': 'Event-Details-View-Candidates',
     'slot_config': 'Event-Details-Configure-Interview-Slots',
     'status_change': 'cardlist-view-Change-Applicant Status',
+    'lobby': 'Event-Details-View-Interview-Lobby',
     'float_click_class': 'fa-angle-right',
     'float_action': ''
 }
@@ -97,4 +98,8 @@ CANDIDATE = {
 
 SLOT = {
     'assign': '//*[@bs-tooltip="{}{}{}"]'.format("'", 'Assign slots', "'")
+}
+
+CANDIDATE_LOBBY_LOGIN = {
+    'candidate_name': "//label[contains(text(),'{}')]",
 }

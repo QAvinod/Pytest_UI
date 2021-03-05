@@ -10,6 +10,7 @@ class Actions:
     __e_event_actions_xpath = Locators.ACTIONS['actions_click']
     __e_event_candidates_id = Locators.ACTIONS['view_candidates']
     __e_event_slot_id = Locators.ACTIONS['slot_config']
+    __e_event_lobby_id = Locators.ACTIONS['lobby']
 
     def __init__(self, driver):
         self.driver = driver
@@ -40,6 +41,15 @@ class Actions:
             self.wait.web_element_wait_click(By.ID, self.__e_event_slot_id, 'Event_slot_config_action')
             self.wait.loading()
             print('Event slot configuration - Screen')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def event_lobby(self):
+        try:
+            self.wait.web_element_wait_click(By.ID, self.__e_event_lobby_id, 'View_Event_Lobby')
+            self.wait.loading()
+            print('View Event Lobby - Screen')
             return True
         except Exception as error:
             ui_logger.error(error)

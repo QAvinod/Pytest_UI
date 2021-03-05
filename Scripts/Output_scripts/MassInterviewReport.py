@@ -46,6 +46,14 @@ class MassOutputReport:
         testdata_headers = ['Event Actions', 'Event Slot Action', 'Click to select stage', 'Entered Stage-Status',
                             'Go Button', 'Enter No.of Slots', 'Go Button', 'Date Field', 'Count Field',
                             'Clear time Field', 'Enter time Field', 'Assign slot button', 'Assign slot - Ok',
-                            'Communicate slot - Ok', 'Search Id', 'Search Button', 'Link action', 'LoginLink - Copied']
+                            'Communicate slot - Ok', 'Search Id', 'Search Button', 'Link action', 'LoginLink - Copied',
+                            'Cancel Button']
         self.xlw.input_output_report(testdata_headers=testdata_headers, collection=slot_config_coll,
                                      i_column=8, o_column=9, path=self.__path)
+
+    def create_room_report(self, room_coll):
+        testdata_headers = ['Event Actions', 'Interview Lobby', 'Create room', 'Room Name Field', 'Select interviewers',
+                            'Search Interviewers', 'Move all', 'Done', 'Select Participants', 'Search Participants',
+                            'Move all', 'Done']
+        self.xlw.input_output_report(testdata_headers=testdata_headers, collection=room_coll,
+                                     i_column=10, o_column=11, path=self.__path)
