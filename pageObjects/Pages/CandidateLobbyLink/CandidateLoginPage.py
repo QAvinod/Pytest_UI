@@ -27,6 +27,7 @@ class LoginPage:
     def login_screen(self, candidate_id):
         try:
             self.wait.loading()
+            time.sleep(2)
             self.wait.web_element_wait_send_keys(By.XPATH,
                                                  self.__e_candidate_id_xpath, candidate_id, 'candidate_login_screen')
             return True
