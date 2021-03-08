@@ -14,14 +14,17 @@ class LobbyPage:
     __e_search_xpath = Locators.TITLE['title'].format('Type here to search')
     __e_select_all_xpath = Locators.MULTI_SELECTIONS['moveAllItemsRight']
     __e_done_button = Locators.BUTTONS['all_buttons'].format('Done')
+    __e_created_room_xpath = Locators.BUTTONS['actionClicked'].format("'", 'createRoom', "'")
 
     def __init__(self, driver):
         self.driver = driver
 
         self.wait = WebElementWait(self.driver)
+        self.scroll = PageScroll(self.driver)
 
     def create_room_button(self):
         try:
+            self.scroll.up(0, 100)
             self.wait.web_element_wait_click(By.XPATH, self.__e_create_button_xpath, 'room_create_button')
             self.wait.loading()
             return True
@@ -51,7 +54,7 @@ class LobbyPage:
 
     def search(self, key):
         try:
-            self.wait.web_element_wait_send_keys(By.XPATH, self.__e_participants_xpath, key, 'Search_field')
+            self.wait.web_element_wait_send_keys(By.XPATH, self.__e_search_xpath, key, 'Search_field')
             return True
         except Exception as error:
             ui_logger.error(error)
@@ -66,6 +69,14 @@ class LobbyPage:
     def done(self):
         try:
             self.wait.web_element_wait_click(By.XPATH, self.__e_done_button, 'Done_button')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def created_button(self):
+        try:
+            time.sleep(1)
+            self.wait.web_element_wait_click(By.XPATH, self.__e_created_room_xpath, 'room_created_button')
             return True
         except Exception as error:
             ui_logger.error(error)

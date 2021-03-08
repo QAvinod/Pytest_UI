@@ -35,7 +35,8 @@ class Room:
                   self.lobby.select_participants(),
                   self.lobby.search(self.xl_int2),
                   self.lobby.move_all(),
-                  self.lobby.done()
+                  self.lobby.done(),
+                  self.lobby.created_button()
                   ]
         for func in __list:
             if func:
