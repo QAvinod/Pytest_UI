@@ -35,7 +35,7 @@ class MassInterviewFlow:
         slot = SlotConfiguration(driver=driver, index=index, time=time)
         allocation = EnableAutoAssign(driver=driver, index=index)
         room = Room(driver=driver, index=index, version=version)
-        candidate = CandidateLobbyLogin(driver=driver)
+        candidate = CandidateLobbyLogin(driver=driver, index=index, version=version)
 
         MASS_OUTPUT = MassInterviewReport.MassOutputReport(version=version, server=server, start_date_time=date_time)
 
@@ -75,7 +75,8 @@ class MassInterviewFlow:
         self.MASS_OUTPUT.create_room_report(self.room.room_collection)
 
     def candidate_lobby(self):
-        self.candidate.candidate_lobby_login(self.id)
+        self.candidate.candidate_lobby_login(self.id, self.login_link)
+        self.MASS_OUTPUT.candidate_login_report(self.candidate.candidate_lobby_collection)
 
 
 Object = MassInterviewFlow()
@@ -86,5 +87,6 @@ if Object.login_success:
     Object.auto_allocation_configuration()
     Object.slot_configuration()
     Object.room_creation()
+    Object.candidate_lobby()
     Object.MASS_OUTPUT.overall_status()
     Object.environment.close()

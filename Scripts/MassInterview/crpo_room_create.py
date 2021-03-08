@@ -18,6 +18,8 @@ class Room:
         self.xl_room_name = xl['room_name'][0].format(version)
         self.xl_int1 = xl['int1'][0]
         self.xl_int2 = xl['int2'][0]
+        self.xl_message = xl['message'][0]
+        self.xl_active_message = xl['active_message'][0]
 
         self.room_collection = []
 
@@ -36,7 +38,9 @@ class Room:
                   self.lobby.search(self.xl_int2),
                   self.lobby.move_all(),
                   self.lobby.done(),
-                  self.lobby.created_button()
+                  self.lobby.created_button(self.xl_message),
+                  self.lobby.active_room(),
+                  self.lobby.ok_button(self.xl_active_message)
                   ]
         for func in __list:
             if func:

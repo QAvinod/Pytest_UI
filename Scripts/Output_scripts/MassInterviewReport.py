@@ -8,11 +8,12 @@ class MassOutputReport:
         self.server = server
         self.start_date_time = start_date_time
         self.__path = outputFile.OUTPUT_PATH['Mass_Interview_output']
-        test_cases = 70
+        test_cases = 100
         excel_headers = ['Event', 'Status', 'Applicant (Change Status)', 'Status', 'Event (Slot Config)', 'Status',
-                         'Configurations (Auto Allocation)', 'Status', 'Slot', 'Status', 'Room Creation', 'Status']
+                         'Configurations (Auto Allocation)', 'Status', 'Slot', 'Status', 'Room Creation', 'Status',
+                         'Candidate Login', 'Status']
         color_headers = ['Status', 'Event', 'Applicant (Change Status)', 'Event (Slot Config)', 'Slot', 'Room Creation',
-                         'Configurations (Auto Allocation)']
+                         'Configurations (Auto Allocation)', 'Candidate Login']
         self.xlw = excelWrite.ExcelReportWrite(version=version, test_cases=test_cases,
                                                excel_headers_list=excel_headers,
                                                color_headers_list=color_headers)
@@ -54,6 +55,12 @@ class MassOutputReport:
     def create_room_report(self, room_coll):
         testdata_headers = ['Event Actions', 'Interview Lobby', 'Create room', 'Room Name Field', 'Select interviewers',
                             'Search Interviewers', 'Move all', 'Done', 'Select Participants', 'Search Participants',
-                            'Move all', 'Done', 'Created Room Button']
+                            'Move all', 'Done', 'Created Room Button', 'Activate Room Action', 'Activated-Ok']
         self.xlw.input_output_report(testdata_headers=testdata_headers, collection=room_coll,
                                      i_column=10, o_column=11, path=self.__path)
+
+    def candidate_login_report(self, candidate_login_coll):
+        testdata_headers = ['Open Link', 'Enter Id', 'Enter Button', 'Name element', 'Name Validation', 'Close Tab',
+                            'Switch to tab']
+        self.xlw.input_output_report(testdata_headers=testdata_headers, collection=candidate_login_coll,
+                                     i_column=12, o_column=13, path=self.__path)

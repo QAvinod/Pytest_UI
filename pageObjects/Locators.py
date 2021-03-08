@@ -104,3 +104,7 @@ SLOT = {
 CANDIDATE_LOBBY_LOGIN = {
     'candidate_name': "//label[contains(text(),'{}')]",
 }
+
+ROOM = {
+    'active': '//*[@bs-tooltip="{}{}{}"]'.format("'", 'Activate Room', "'")
+}
