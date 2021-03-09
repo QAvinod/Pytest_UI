@@ -11,6 +11,8 @@ class LoginPage:
     __e_candidate_id_xpath = Locators.PLACEHOLDER['text_ph'].format('Enter Candidate Id')
     __e_enter_button_xpath = Locators.BUTTONS['button'].format('Enter the room')
     __e_candidate_name_xpath = Locators.CANDIDATE_LOBBY_LOGIN['candidate_name']
+    __e_almost_message_css = Locators.CANDIDATE_LOBBY_LOGIN['almost-message']
+    __e_queued_message_xpath = Locators.CANDIDATE_LOBBY_LOGIN['queued-message']
 
     def __init__(self, driver):
         self.driver = driver
@@ -51,6 +53,24 @@ class LoginPage:
             if self.wait.text_value in self.wait.text_value:
                 print(f'Lobby Candidate name - {self.wait.text_value}')
                 return True
-            return True
         except Exception as error:
             ui_logger.error(error)
+
+    def almost_message(self, message):
+        try:
+            self.wait.web_element_wait_text(By.CSS_SELECTOR, self.__e_almost_message_css, 'almost_message')
+            if self.wait.text_value == message:
+                print(f'Candidate Lobby - {self.wait.text_value}')
+                return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def queued_message(self, message):
+        try:
+            self.wait.web_element_wait_text(By.XPATH, self.__e_queued_message_xpath, 'queued_message')
+            if self.wait.text_value == message:
+                print(f'Candidate Lobby - {self.wait.text_value}')
+                return True
+        except Exception as error:
+            ui_logger.error(error)
+

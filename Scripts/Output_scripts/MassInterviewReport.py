@@ -60,7 +60,10 @@ class MassOutputReport:
                                      i_column=10, o_column=11, path=self.__path)
 
     def candidate_login_report(self, candidate_login_coll):
-        testdata_headers = ['Open Link', 'Enter Id', 'Enter Button', 'Name element', 'Name Validation', 'Close Tab',
-                            'Switch to tab']
+        testdata_headers = ['Open Link-1st time', 'Enter Id', 'Enter Button', 'Name Validation',
+                            'Almost there-Message', 'Close Tab', 'Switch to tab', 'Manage Candidate Tab',
+                            'Un assign room action', 'Confirmation-Ok', 'Unassigned-Ok', 'Open Link-2nd time',
+                            'Enter Id', 'Enter Button', 'Name Validation', 'wait to be queued-Message',
+                            'Close Tab', 'Switch to tab']
         self.xlw.input_output_report(testdata_headers=testdata_headers, collection=candidate_login_coll,
                                      i_column=12, o_column=13, path=self.__path)

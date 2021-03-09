@@ -5,6 +5,7 @@ from utilities.PageScroll import PageScroll
 from Listeners.logger_settings import ui_logger
 from utilities.WebDriver_Wait import WebElementWait
 from utilities.uiNotifier import Notifier
+from pageObjects.Pages.MenuPages.eventSubTabPages import EventSubTabs
 
 
 class LobbyPage:
@@ -18,6 +19,9 @@ class LobbyPage:
     __e_created_room_xpath = Locators.BUTTONS['actionClicked'].format("'", 'createRoom', "'")
     __e_active_room_xpath = Locators.ROOM['active']
     __e_ok_button_xpath = Locators.BUTTONS['all_buttons'].format('OK')
+    __e_un_assign_xpath = Locators.CANDIDATE_LOBBY_LOGIN['un-assign']
+    __e_assign_xpath = Locators.CANDIDATE_LOBBY_LOGIN['assign']
+    __e_room_name_field_xpath = Locators.PLACEHOLDER['text_ph'].format('Room Name')
 
     def __init__(self, driver):
         self.driver = driver
@@ -25,6 +29,7 @@ class LobbyPage:
         self.wait = WebElementWait(self.driver)
         self.scroll = PageScroll(self.driver)
         self.message = Notifier(self.driver)
+        self.sub_tab = EventSubTabs(self.driver)
 
     def create_room_button(self):
         try:
@@ -102,6 +107,53 @@ class LobbyPage:
             time.sleep(0.5)
             self.message.glowing_messages(message)
             self.message.dismiss_message()
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def manage_candidates_tab(self):
+        try:
+            self.sub_tab.manage_candidates()
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def un_assign_room(self):
+        try:
+            self.wait.web_element_wait_click(By.XPATH, self.__e_un_assign_xpath, 'Un_assign_from_room')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def un_assign_ok_buttons(self):
+        try:
+            self.wait.web_element_wait_click(By.XPATH, self.__e_ok_button_xpath, 'un_assign_ok_buttons')
+            time.sleep(0.5)
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def assign_room_action(self):
+        try:
+            self.wait.web_element_wait_click(By.XPATH, self.__e_assign_xpath, 'assign_room_action')
+            self.wait.loading()
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def room_name_field(self, room_name):
+        try:
+            self.wait.web_element_wait_send_keys(By.XPATH,
+                                                 self.__e_room_name_field_xpath, room_name, 'room_name_field')
+            self.wait.drop_down_selection()
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def room_assign(self):
+        try:
+            self.wait.web_element_wait_click(By.XPATH, self.__e_assign_xpath, 'room_assign')
+            self.wait.loading()
             return True
         except Exception as error:
             ui_logger.error(error)

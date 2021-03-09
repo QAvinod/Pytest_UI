@@ -103,6 +103,10 @@ SLOT = {
 
 CANDIDATE_LOBBY_LOGIN = {
     'candidate_name': "//label[contains(text(),'{}')]",
+    'queued-message': "/html/body/div[2]/div[1]/div[1]/div[2]/div/div/div/div/div/div/div/div[2]/div[1]/p[1]",
+    'almost-message': ".headerText.ng-scope",
+    'un-assign': '//*[@bs-tooltip="{}{}{}"]'.format("'", 'Unassign Room', "'"),
+    'assign': '//*[@bs-tooltip="{}{}{}"]'.format("'", 'Assign Room', "'"),
 }
 
 ROOM = {

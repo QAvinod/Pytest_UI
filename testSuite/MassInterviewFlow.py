@@ -7,6 +7,7 @@ from Scripts.MassInterview.crpo_event_change_applicant_status import EventApplic
 from Scripts.MassInterview.crpo_event_slot_configuration import SlotConfiguration
 from Scripts.MassInterview.crpo_candidate_login import CandidateLobbyLogin
 from Scripts.MassInterview.crpo_room_create import Room
+import time
 
 
 class MassInterviewFlow:
@@ -75,6 +76,7 @@ class MassInterviewFlow:
         self.MASS_OUTPUT.create_room_report(self.room.room_collection)
 
     def candidate_lobby(self):
+        time.sleep(30)
         self.candidate.candidate_lobby_login(self.id, self.login_link)
         self.MASS_OUTPUT.candidate_login_report(self.candidate.candidate_lobby_collection)
 
