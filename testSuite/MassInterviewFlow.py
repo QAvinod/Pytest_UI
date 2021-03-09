@@ -7,6 +7,8 @@ from Scripts.MassInterview.crpo_event_change_applicant_status import EventApplic
 from Scripts.MassInterview.crpo_event_slot_configuration import SlotConfiguration
 from Scripts.MassInterview.crpo_candidate_login import CandidateLobbyLogin
 from Scripts.MassInterview.crpo_room_create import Room
+from Scripts.MassInterview.crpo_assign_room import AssignRoom
+from Scripts.MassInterview.crpo_interviewer_login import InterviewLogin
 import time
 
 
@@ -37,6 +39,8 @@ class MassInterviewFlow:
         allocation = EnableAutoAssign(driver=driver, index=index)
         room = Room(driver=driver, index=index, version=version)
         candidate = CandidateLobbyLogin(driver=driver, index=index, version=version)
+        assign_room = AssignRoom(driver=driver, index=index, version=version)
+        int_login = InterviewLogin(driver=driver, index=index)
 
         MASS_OUTPUT = MassInterviewReport.MassOutputReport(version=version, server=server, start_date_time=date_time)
 
@@ -76,19 +80,27 @@ class MassInterviewFlow:
         self.MASS_OUTPUT.create_room_report(self.room.room_collection)
 
     def candidate_lobby(self):
-        time.sleep(30)
         self.candidate.candidate_lobby_login(self.id, self.login_link)
         self.MASS_OUTPUT.candidate_login_report(self.candidate.candidate_lobby_collection)
+
+    def room_tagging(self):
+        self.assign_room.assign_room()
+        self.MASS_OUTPUT.room_tag_report(self.assign_room.assign_room_collection)
+
+    def interviewer_logins(self):
+        self.int_login.interviewer_login()
 
 
 Object = MassInterviewFlow()
 Object.crpo_login()
 
 if Object.login_success:
-    Object.applicant_status_change()
-    Object.auto_allocation_configuration()
-    Object.slot_configuration()
-    Object.room_creation()
-    Object.candidate_lobby()
+    # Object.applicant_status_change()
+    # Object.auto_allocation_configuration()
+    # Object.slot_configuration()
+    # Object.room_creation()
+    # Object.candidate_lobby()
+    # Object.room_tagging()
+    Object.interviewer_logins()
     Object.MASS_OUTPUT.overall_status()
     Object.environment.close()

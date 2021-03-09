@@ -12,5 +12,6 @@ INPUT_PATH = {
     'event_slot_config': GENERIC_INPUT_PATH + 'Event_slot_config.xls',
     'event_assign_config': GENERIC_INPUT_PATH + 'Event_assign_chat_config.xls',
     'event_room': GENERIC_INPUT_PATH + 'Event_room_creation.xls',
-    'candidate_lobby': GENERIC_INPUT_PATH + 'Lobby_Candidate.xls'
+    'candidate_lobby': GENERIC_INPUT_PATH + 'Lobby_Candidate.xls',
+    'interview_lobby': GENERIC_INPUT_PATH + 'Lobby_Interviewer.xls'
 }

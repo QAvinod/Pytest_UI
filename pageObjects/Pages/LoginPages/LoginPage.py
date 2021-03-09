@@ -2,6 +2,7 @@ import time
 from pageObjects import Locators
 from selenium.webdriver.common.by import By
 from utilities.WebDriver_Wait import WebElementWait
+from Listeners.logger_settings import ui_logger
 
 
 class Login:
@@ -14,6 +15,8 @@ class Login:
     __e_password_xpath = Locators.LOGIN['password']
     __e_login_button_css = Locators.LOGIN['login']
     __e_anchor_tag = Locators.TAG['anchor']
+    __e_logout_id = Locators.LOGIN['logout']
+    __e_click_xpath = Locators.LOGIN['click_to_login']
 
     def __init__(self, driver):
         self.driver = driver
@@ -39,3 +42,26 @@ class Login:
         self.wait.loading()
         assert self.wait.web_elements_wait_text(By.TAG_NAME, self.__e_anchor_tag, user_name) == user_name, \
             'Logged in different account please check the details'
+
+    def login_account_click(self, user_name):
+        try:
+            self.wait.web_elements_wait_click(By.TAG_NAME, self.__e_anchor_tag, user_name)
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def login_out(self):
+        try:
+            time.sleep(2)
+            self.wait.web_element_wait_click(By.ID, self.__e_logout_id, 'Logout from account')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def click_here_to_login(self):
+        try:
+            time.sleep(1)
+            self.wait.web_element_wait_click(By.XPATH, self.__e_click_xpath, 'Logout from account')
+            return True
+        except Exception as error:
+            ui_logger.error(error)

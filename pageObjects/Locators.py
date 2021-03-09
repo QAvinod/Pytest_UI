@@ -57,7 +57,9 @@ ACTIONS = {
 SEARCH = {
     'advance_search': 'cardlist-view-filter',
     'Name': 'Name',
-    'name': 'name'
+    'name': 'name',
+    'manage_candidate_search': '.fa-filter',
+    'clear': 'cardlist-view-clear-filter',
 }
 
 MULTI_SELECTIONS = {
@@ -73,6 +75,8 @@ LOGIN = {
     'login_name': 'loginName',
     'password': '//input[@type="password"]',
     'login': 'login',
+    'logout': 'crpo-settings-logout',
+    'click_to_login': '//a[@ng-click="vm.backToLogin()"]'
 }
 
 JOB = {
@@ -97,18 +101,16 @@ CANDIDATE = {
     'id': '//*[@id="mainBodyElement"]/div[3]/div/div[1]/div[1]/div/div/div[2]/div[2]/p[2]/span[2]'
 }
 
-SLOT = {
-    'assign': '//*[@bs-tooltip="{}{}{}"]'.format("'", 'Assign slots', "'")
+EVENT_LOBBY = {
+    'active': '//*[@bs-tooltip="{}{}{}"]'.format("'", 'Activate Room', "'"),
+    'assign_slot': '//*[@bs-tooltip="{}{}{}"]'.format("'", 'Assign slots', "'"),
+    'un_assign': '//*[@bs-tooltip="{}{}{}"]'.format("'", 'Unassign Room', "'"),
+    'assign_room': '//*[@bs-tooltip="{}{}{}"]'.format("'", 'Assign Room', "'"),
+    'room_search': 'noDataMsg'
 }
 
 CANDIDATE_LOBBY_LOGIN = {
     'candidate_name': "//label[contains(text(),'{}')]",
     'queued-message': "/html/body/div[2]/div[1]/div[1]/div[2]/div/div/div/div/div/div/div/div[2]/div[1]/p[1]",
     'almost-message': ".headerText.ng-scope",
-    'un-assign': '//*[@bs-tooltip="{}{}{}"]'.format("'", 'Unassign Room', "'"),
-    'assign': '//*[@bs-tooltip="{}{}{}"]'.format("'", 'Assign Room', "'"),
-}
-
-ROOM = {
-    'active': '//*[@bs-tooltip="{}{}{}"]'.format("'", 'Activate Room', "'")
 }

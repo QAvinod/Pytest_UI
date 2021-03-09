@@ -12,6 +12,8 @@ class Search:
     __e_Name_name = Locators.SEARCH['Name']
     __e_name_name = Locators.SEARCH['name']
     __e_search_btn_xpath = Locators.BUTTONS['button'].format('Search')
+    __e_manage_search_css = Locators.SEARCH['manage_candidate_search']
+    __e_clear_id = Locators.SEARCH['clear']
 
     def __init__(self, driver):
         self.driver = driver
@@ -56,6 +58,21 @@ class Search:
             time.sleep(1)
             self.page_scroll.up(0, 300)
             self.wait.web_element_wait_click(By.XPATH, self.__e_search_btn_xpath, 'search_button')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def manage_candidate_search(self):
+        try:
+            self.wait.web_element_wait_click(By.CSS_SELECTOR, self.__e_manage_search_css, 'advance_search')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def clear_search(self):
+        try:
+            time.sleep(0.5)
+            self.wait.web_element_wait_click(By.ID, self.__e_clear_id, 'advance_search')
             return True
         except Exception as error:
             ui_logger.error(error)

@@ -17,11 +17,16 @@ class LobbyPage:
     __e_select_all_xpath = Locators.MULTI_SELECTIONS['moveAllItemsRight']
     __e_done_button = Locators.BUTTONS['all_buttons'].format('Done')
     __e_created_room_xpath = Locators.BUTTONS['actionClicked'].format("'", 'createRoom', "'")
-    __e_active_room_xpath = Locators.ROOM['active']
+    __e_active_room_xpath = Locators.EVENT_LOBBY['active']
     __e_ok_button_xpath = Locators.BUTTONS['all_buttons'].format('OK')
-    __e_un_assign_xpath = Locators.CANDIDATE_LOBBY_LOGIN['un-assign']
-    __e_assign_xpath = Locators.CANDIDATE_LOBBY_LOGIN['assign']
+    __e_un_assign_xpath = Locators.EVENT_LOBBY['un_assign']
+    __e_assign_room_xpath = Locators.EVENT_LOBBY['assign_room']
     __e_room_name_field_xpath = Locators.PLACEHOLDER['text_ph'].format('Room Name')
+    __e_room_search_filed_xpath = Locators.TITLE['title'].format('Select Room')
+    __e_search_button_xpath = Locators.BUTTONS['button'].format('Search')
+    __e_room_search_class = Locators.EVENT_LOBBY['room_search']
+    __e_assigning_room_xpath = Locators.BUTTONS['actionClicked'].format("'", 'assignCandidateToRoom', "'")
+    __e_candidate_info_xpath = Locators.TITLE['title'].format('View Candidate Info')
 
     def __init__(self, driver):
         self.driver = driver
@@ -125,17 +130,17 @@ class LobbyPage:
         except Exception as error:
             ui_logger.error(error)
 
-    def un_assign_ok_buttons(self):
+    def ok_buttons(self):
         try:
             self.wait.web_element_wait_click(By.XPATH, self.__e_ok_button_xpath, 'un_assign_ok_buttons')
-            time.sleep(0.5)
+            time.sleep(1)
             return True
         except Exception as error:
             ui_logger.error(error)
 
     def assign_room_action(self):
         try:
-            self.wait.web_element_wait_click(By.XPATH, self.__e_assign_xpath, 'assign_room_action')
+            self.wait.web_element_wait_click(By.XPATH, self.__e_assign_room_xpath, 'assign_room_action')
             self.wait.loading()
             return True
         except Exception as error:
@@ -150,10 +155,46 @@ class LobbyPage:
         except Exception as error:
             ui_logger.error(error)
 
-    def room_assign(self):
+    def room_assigning_action(self):
         try:
-            self.wait.web_element_wait_click(By.XPATH, self.__e_assign_xpath, 'room_assign')
+            time.sleep(1)
+            self.wait.web_element_wait_click(By.XPATH, self.__e_assigning_room_xpath, 'room_assign')
             self.wait.loading()
             return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def room_search_filed(self):
+        try:
+            self.wait.web_element_wait_click(By.XPATH, self.__e_room_search_filed_xpath, 'room_search_filed')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def search_button(self):
+        try:
+            self.wait.web_element_wait_click(By.XPATH, self.__e_search_button_xpath, 'search_button')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def no_candidate_message(self, message):
+        try:
+            time.sleep(1)
+            self.wait.web_element_wait_text(By.CLASS_NAME, self.__e_room_search_class, 'tag_room_search_candidate')
+            if self.wait.text_value.strip() == message:
+                print(f'No candidate tagged to room message - {self.wait.text_value}')
+                self.driver.refresh()
+                self.wait.loading()
+                return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def candidate_info(self, candidate_name):
+        try:
+            self.wait.web_element_wait_text(By.XPATH, self.__e_candidate_info_xpath, 'candidate_info')
+            if self.wait.text_value == candidate_name:
+                print(f'Candidate name - {self.wait.text_value}')
+                return True
         except Exception as error:
             ui_logger.error(error)

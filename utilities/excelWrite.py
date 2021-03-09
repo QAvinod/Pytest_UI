@@ -6,14 +6,14 @@ from Listeners.logger_settings import ui_logger
 
 
 class ExcelReportWrite(styles.FontColor):
-    def __init__(self, version, test_cases, excel_headers_list, color_headers_list):
+    def __init__(self, version, test_cases):
         super(ExcelReportWrite, self).__init__()
 
         self.date_now = str(date.today())
         self.Expected_success_cases = list(map(lambda x: 'Pass', range(0, test_cases)))
         self.Actual_success_cases = []
-        self.excel_headers = excel_headers_list
-        self.color_headers = color_headers_list
+        # self.excel_headers = excel_headers_list
+        # self.color_headers = color_headers_list
 
         # -------------------------------------
         # Excel sheet write for Output results
@@ -21,14 +21,15 @@ class ExcelReportWrite(styles.FontColor):
         self.wb_Result = xlwt.Workbook()
         self.ws = self.wb_Result.add_sheet('UI_Automation_{}'.format(version))
 
-        index = 0
-        excelheaders = self.excel_headers
+    def excel_header_by_index(self, row, col, excel_headers_list, color_headers_list):
+        column = col
+        excelheaders = excel_headers_list
         for headers in excelheaders:
-            if headers in self.color_headers:
-                self.ws.write(1, index, headers, self.style0)
+            if headers in color_headers_list:
+                self.ws.write(row, column, headers, self.style0)
             else:
-                self.ws.write(1, index, headers, self.style1)
-            index += 1
+                self.ws.write(row, column, headers, self.style1)
+            column += 1
 
     def __input_data_verification(self, row, column, input_key):
         self.ws.write(row, column, input_key, self.style8)
@@ -46,9 +47,9 @@ class ExcelReportWrite(styles.FontColor):
         except Exception as error:
             ui_logger.error(error)
 
-    def input_output_report(self, testdata_headers, collection, i_column, o_column, path):
+    def input_output_report(self, testdata_headers, collection, row, i_column, o_column, path):
         try:
-            row = 2
+            row = row
             testdata_headers = testdata_headers
             print(collection)
             for loop in range(0, len(collection)):

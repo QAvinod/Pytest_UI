@@ -17,7 +17,7 @@ class EventSlot:
     __e_date_field_xpath = Locators.PLACEHOLDER['place_holder'].format('From Date')
     __e_time_field_xpath = Locators.PLACEHOLDER['place_holder'].format('From Time')
     __e_count_field_xpath = Locators.PLACEHOLDER['num_ph'].format('Count')
-    __e_assign_button_xpath = Locators.SLOT['assign']
+    __e_assign_button_xpath = Locators.EVENT_LOBBY['assign_slot']
     __e_ok_button_xpath = Locators.BUTTONS['all_buttons'].format('OK')
     __e_cancel_button_xpath = Locators.BUTTONS['all_buttons'].format('CANCEL')
     __e_candidate_id_xpath = Locators.PLACEHOLDER['place_holder'].format('Candidate Id(s) (Eg: 1234, 2312,...)')
