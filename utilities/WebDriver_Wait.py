@@ -12,6 +12,7 @@ class WebElementWait:
 
     """
     load = Locators.LOADING['load']
+    load_text = Locators.LOADING['load_text']
     upload = Locators.LOADING['upload']
 
     def __init__(self, driver):
@@ -122,8 +123,15 @@ class WebElementWait:
             if i.text.strip() == value.strip():
                 button_name = i.text.strip()
                 i.click()
-                time.sleep(2)
+                time.sleep(1.5)
         return button_name
+
+    def web_elements_wait_send_keys(self, by_locator, element, keys):
+        self.web_elements_wait(by_locator, element)
+        for i in self.perform:
+            if i:
+                i.send_keys(keys)
+                time.sleep(1.5)
 
     def clear(self, by_locator, element, failure_name):
         self.__web_element_wait(by_locator, element, failure_name)

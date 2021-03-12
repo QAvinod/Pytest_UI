@@ -13,6 +13,8 @@ class LoginPage:
     __e_candidate_name_xpath = Locators.CANDIDATE_LOBBY_LOGIN['candidate_name']
     __e_almost_message_css = Locators.CANDIDATE_LOBBY_LOGIN['almost-message']
     __e_queued_message_xpath = Locators.CANDIDATE_LOBBY_LOGIN['queued-message']
+    __e_finish_message_xpath = Locators.CANDIDATE_LOBBY_LOGIN['finished-message']
+    __e_your_message_xpath = Locators.CANDIDATE_LOBBY_LOGIN['your-message']
 
     def __init__(self, driver):
         self.driver = driver
@@ -68,6 +70,24 @@ class LoginPage:
     def queued_message(self, message):
         try:
             self.wait.web_element_wait_text(By.XPATH, self.__e_queued_message_xpath, 'queued_message')
+            if self.wait.text_value == message:
+                print(f'Candidate Lobby - {self.wait.text_value}')
+                return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def it_is_your_message(self, message):
+        try:
+            self.wait.web_element_wait_text(By.XPATH, self.__e_your_message_xpath, 'it_is_your_message')
+            if self.wait.text_value == message:
+                print(f'Candidate Lobby - {self.wait.text_value}')
+                return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def finish_interview_message(self, message):
+        try:
+            self.wait.web_element_wait_text(By.XPATH, self.__e_finish_message_xpath, 'finish_interview_message')
             if self.wait.text_value == message:
                 print(f'Candidate Lobby - {self.wait.text_value}')
                 return True

@@ -9,6 +9,9 @@ from Scripts.MassInterview.crpo_candidate_login import CandidateLobbyLogin
 from Scripts.MassInterview.crpo_room_create import Room
 from Scripts.MassInterview.crpo_assign_room import AssignRoom
 from Scripts.MassInterview.crpo_interviewer_login import InterviewLogin
+from Scripts.MassInterview.crpo_select_candidate import SelectCandidate
+from Scripts.MassInterview.crpo_invite_candidate import InviteCandidate
+from Scripts.MassInterview.crpo_provide_feedback import ProvideFeedback
 import time
 
 
@@ -40,7 +43,10 @@ class MassInterviewFlow:
         room = Room(driver=driver, index=index, version=version)
         candidate = CandidateLobbyLogin(driver=driver, index=index, version=version)
         assign_room = AssignRoom(driver=driver, index=index, version=version)
-        int_login = InterviewLogin(driver=driver, index=index)
+        int_login = InterviewLogin(driver=driver, index=index, version=version)
+        select = SelectCandidate(driver=driver, index=index, version=version)
+        invite = InviteCandidate(driver=driver, index=index, version=version)
+        feedback = ProvideFeedback(driver=driver, index=index, version=version)
 
         MASS_OUTPUT = MassInterviewReport.MassOutputReport(version=version, server=server, start_date_time=date_time)
 
@@ -89,6 +95,19 @@ class MassInterviewFlow:
 
     def interviewer_logins(self):
         self.int_login.interviewer_login()
+        self.MASS_OUTPUT.interviewer_login_report(self.int_login.int_collection)
+
+    def candidate_selection(self):
+        self.select.select_candidate(self.id, self.login_link)
+        self.MASS_OUTPUT.select_candidate_report(self.select.select_candidate_collection)
+
+    def feedback_provide(self):
+        self.feedback.provide_feedback()
+        self.MASS_OUTPUT.feedback_report(self.feedback.pf_collection)
+
+    def candidate_invitation(self):
+        self.invite.invite_candidate(self.id, self.login_link)
+        self.MASS_OUTPUT.invite_candidate_report(self.invite.invite_candidate_collection)
 
 
 Object = MassInterviewFlow()
@@ -102,5 +121,8 @@ if Object.login_success:
     # Object.candidate_lobby()
     # Object.room_tagging()
     Object.interviewer_logins()
+    # Object.candidate_selection()
+    Object.feedback_provide()
+    Object.candidate_invitation()
     Object.MASS_OUTPUT.overall_status()
     Object.environment.close()

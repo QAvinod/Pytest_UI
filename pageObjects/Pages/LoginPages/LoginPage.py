@@ -29,19 +29,35 @@ class Login:
         self.wait.web_element_wait_click(By.CSS_SELECTOR, self.__e_next_button_css, 'login_next_button')
 
     def login_name(self, login_name):
-        time.sleep(1.5)
-        self.wait.web_element_wait_send_keys(By.NAME, self.__e_login_name_l, login_name, 'login_name_field')
+        try:
+            time.sleep(1.5)
+            self.wait.web_element_wait_send_keys(By.NAME, self.__e_login_name_l, login_name, 'login_name_field')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
 
     def password(self, password):
-        self.wait.web_element_wait_send_keys(By.XPATH, self.__e_password_xpath, password, 'login_password_field')
+        try:
+            self.wait.web_element_wait_send_keys(By.XPATH, self.__e_password_xpath, password, 'login_password_field')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
 
     def login_button(self):
-        self.wait.web_element_wait_click(By.CLASS_NAME, self.__e_login_button_css, 'login_button')
+        try:
+            self.wait.web_element_wait_click(By.CLASS_NAME, self.__e_login_button_css, 'login_button')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
 
     def login_account_name_verification(self, user_name):
-        self.wait.loading()
-        assert self.wait.web_elements_wait_text(By.TAG_NAME, self.__e_anchor_tag, user_name) == user_name, \
-            'Logged in different account please check the details'
+        try:
+            self.wait.loading()
+            assert self.wait.web_elements_wait_text(By.TAG_NAME, self.__e_anchor_tag, user_name) == user_name, \
+                'Logged in different account please check the details'
+            return True
+        except Exception as error:
+            ui_logger.error(error)
 
     def login_account_click(self, user_name):
         try:
@@ -52,7 +68,7 @@ class Login:
 
     def login_out(self):
         try:
-            time.sleep(2)
+            time.sleep(1)
             self.wait.web_element_wait_click(By.ID, self.__e_logout_id, 'Logout from account')
             return True
         except Exception as error:
@@ -60,7 +76,7 @@ class Login:
 
     def click_here_to_login(self):
         try:
-            time.sleep(1)
+            time.sleep(2)
             self.wait.web_element_wait_click(By.XPATH, self.__e_click_xpath, 'Logout from account')
             return True
         except Exception as error:

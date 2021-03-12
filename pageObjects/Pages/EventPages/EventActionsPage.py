@@ -11,6 +11,7 @@ class Actions:
     __e_event_candidates_id = Locators.ACTIONS['view_candidates']
     __e_event_slot_id = Locators.ACTIONS['slot_config']
     __e_event_lobby_id = Locators.ACTIONS['lobby']
+    __e_event_interview_lobby = Locators.ACTIONS['panel']
 
     def __init__(self, driver):
         self.driver = driver
@@ -50,6 +51,17 @@ class Actions:
             self.wait.web_element_wait_click(By.ID, self.__e_event_lobby_id, 'View_Event_Lobby')
             self.wait.loading()
             print('View Event Lobby - Screen')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def interview_lobby_panel(self):
+        try:
+            self.wait.web_element_wait_click(By.ID, self.__e_event_interview_lobby, 'Interviewer_Lobby_panel')
+            self.wait.loading()
+            print('Event_interviewer_lobby - Screen')
+            time.sleep(5)
+            print('Event_interviewer_lobby - whiteScreen')
             return True
         except Exception as error:
             ui_logger.error(error)

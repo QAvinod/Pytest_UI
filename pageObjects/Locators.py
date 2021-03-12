@@ -1,5 +1,6 @@
 LOADING = {
     'load': 'dw-loading-active',
+    'load_text': 'dw-loading-text',
     'upload': '//*[@ng-disabled="vm.loadingOptions.active"]'
 }
 
@@ -7,6 +8,10 @@ TAG = {
     'anchor': 'a',
     'h4': 'h4',
     'href': 'href'
+}
+
+CHECK_BOX = {
+    'check_box': '//input[@type="checkbox"]',
 }
 
 MENU = {
@@ -41,7 +46,7 @@ BUTTONS = {
     'all_buttons': "//*[text()='{}']",
     'done': '//*[@ng-click="$hide();"]',
     'radio': 'label.btn-default',
-    'actionClicked': '//button[@ng-click="vm.actionClicked({}{}{});"]'
+    'actionClicked': '//*[@ng-click="vm.actionClicked({}{}{});"]'
 }
 
 ACTIONS = {
@@ -50,6 +55,7 @@ ACTIONS = {
     'slot_config': 'Event-Details-Configure-Interview-Slots',
     'status_change': 'cardlist-view-Change-Applicant Status',
     'lobby': 'Event-Details-View-Interview-Lobby',
+    'panel': 'Event-Details-View-Interview-Panel',
     'float_click_class': 'fa-angle-right',
     'float_action': ''
 }
@@ -113,4 +119,13 @@ CANDIDATE_LOBBY_LOGIN = {
     'candidate_name': "//label[contains(text(),'{}')]",
     'queued-message': "/html/body/div[2]/div[1]/div[1]/div[2]/div/div/div/div/div/div/div/div[2]/div[1]/p[1]",
     'almost-message': ".headerText.ng-scope",
+    'your-message': '/html/body/div[2]/div[1]/div[1]/div[2]/div/div/div/div/div/div/div/div[2]/div[1]/p[1]',
+    'finished-message': '/html/body/div[2]/div[1]/div[1]/div[2]/div/div/div/div/div/div/div/div[2]/div/p[1]'
+}
+
+FEEDBACK = {
+    'select_drop_down': '//select[@ng-model="row.rowOptions.selectedRating"]',
+    'decision_button': '//*[@ng-repeat="option in vm.resultStatusOptions"]',
+    'comments': '//textarea[@ng-model="row.rowOptions.skillComment"]',
+    'overall': '.form-control.ng-pristine.ng-valid.ng-empty.ng-touched'
 }
