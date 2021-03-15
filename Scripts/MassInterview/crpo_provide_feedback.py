@@ -31,7 +31,7 @@ class ProvideFeedback:
                   self.int_lobby.feedback_decision(self.xl_shortlist_decision),
                   self.int_lobby.feedback_select_drop_down('Expert'),
                   self.int_lobby.feedback_comments('vinod'),
-                  self.int_lobby.overall_comment('vinod'),
+                  # self.int_lobby.overall_comment('vinod'), --TODO
                   self.new_tab.window_close(),
                   self.new_tab.switch_to_window(0),
                   ]

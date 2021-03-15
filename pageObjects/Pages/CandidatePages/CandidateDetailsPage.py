@@ -17,8 +17,8 @@ class CandidateDetailsPage:
 
     def candidate_status(self, changed_status):
         try:
-            self.wait.loading()
             time.sleep(2)
+            self.wait.loading()
             self.wait.web_element_wait_text(By.XPATH, self.__e_title_xpath.format(changed_status),
                                             f'Candidate_status_{changed_status}')
             if self.wait.text_value == changed_status:

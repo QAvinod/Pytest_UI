@@ -131,7 +131,7 @@ class WebElementWait:
         for i in self.perform:
             if i:
                 i.send_keys(keys)
-                time.sleep(1.5)
+                time.sleep(1)
 
     def clear(self, by_locator, element, failure_name):
         self.__web_element_wait(by_locator, element, failure_name)

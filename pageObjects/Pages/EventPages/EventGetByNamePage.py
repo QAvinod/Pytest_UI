@@ -18,7 +18,7 @@ class EventGetByName:
         try:
             self.wait.loading()
             self.wait.web_element_wait_click(By.XPATH, self.__e_click_name_xpath, 'Event_name_click')
-            time.sleep(3)
+            time.sleep(1.5)
             self.wait.loading()
 
             return True
