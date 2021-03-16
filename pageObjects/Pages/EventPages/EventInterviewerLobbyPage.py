@@ -9,14 +9,11 @@ class InterviewerLobbyPage:
 
     __e_select_candidate_xpath = Locators.BUTTONS['button'].format('Select Candidate')
     __e_provide_feedback_xpath = Locators.BUTTONS['actionClicked'].format("'", 'provideFeedBack', "'")
-    __e_provide_select_drop_css = Locators.FEEDBACK['select_drop_down']
-    __e_provide_comment_xpath = Locators.FEEDBACK['comments']
-    __e_provide_overall_css = '//*[@placeholder="Comments if any..."]'
     __e_invite_video_xpath = Locators.BUTTONS['actionClicked'].format("'", 'markAsCurrentCandidate', "'")
     __e_invite_check_xpath = Locators.CHECK_BOX['check_box']
     __e_proceed_xpath = Locators.BUTTONS['button'].format('Proceed To Interview')
     __e_finish_interview_xpath = Locators.BUTTONS['button'].format('Interview is Finished')
-    __e_decision_button_xpath = Locators.FEEDBACK['decision_button']
+    __e_full_finish_interview_xpath = Locators.INTERVIEWER_LOBBY['finish_interview']
 
     def __init__(self, driver):
         self.driver = driver
@@ -26,6 +23,7 @@ class InterviewerLobbyPage:
         try:
             self.wait.loading()
             self.wait.web_element_wait_click(By.XPATH, self.__e_select_candidate_xpath, 'select_candidate')
+            print('Selected New candidate into - Queue')
             return True
         except Exception as error:
             ui_logger.error(error)
@@ -34,44 +32,6 @@ class InterviewerLobbyPage:
         try:
             self.wait.loading()
             self.wait.web_element_wait_click(By.XPATH, self.__e_provide_feedback_xpath, 'provide_feedback')
-            return True
-        except Exception as error:
-            ui_logger.error(error)
-
-    def feedback_decision(self, decision):
-        try:
-            time.sleep(5)
-            self.wait.loading()
-            self.wait.web_elements_wait_click(By.XPATH, self.__e_decision_button_xpath, decision)
-            print(f'Selected Decision - {decision}')
-            return True
-        except Exception as error:
-            ui_logger.error(error)
-
-    def feedback_select_drop_down(self, value):
-        try:
-            time.sleep(0.5)
-            self.wait.web_elements_wait_send_keys(By.XPATH, self.__e_provide_select_drop_css, value)
-            print(f'Selected Rating - {value}')
-            return True
-        except Exception as error:
-            ui_logger.error(error)
-
-    def feedback_comments(self, comment):
-        try:
-            time.sleep(0.5)
-            self.wait.web_elements_wait_send_keys(By.XPATH, self.__e_provide_comment_xpath, comment)
-            print(f'Given Comment - {comment}')
-            return True
-        except Exception as error:
-            ui_logger.error(error)
-
-    def overall_comment(self, comment):
-        try:
-            time.sleep(1.5)
-            self.wait.web_element_wait_send_keys(By.XPATH,
-                                                 self.__e_provide_overall_css, comment, 'overall_comment')
-            print(f'Given Overall Comment - {comment}')
             return True
         except Exception as error:
             ui_logger.error(error)
@@ -94,6 +54,7 @@ class InterviewerLobbyPage:
         try:
             self.wait.web_element_wait_click(By.XPATH, self.__e_proceed_xpath, 'proceed_video_link')
             time.sleep(1)
+            print('Open Video Interview Link  - screen')
             return True
         except Exception as error:
             ui_logger.error(error)
@@ -102,7 +63,15 @@ class InterviewerLobbyPage:
         try:
             time.sleep(0.5)
             self.wait.web_element_wait_click(By.XPATH, self.__e_finish_interview_xpath, 'finish_interview')
-            time.sleep(1)
+            print('Finish Interview - Clicked')
+            return True
+        except Exception as error:
+            ui_logger.error(error)
+
+    def full_finish_interview(self):
+        try:
+            self.wait.web_element_wait_click(By.XPATH, self.__e_full_finish_interview_xpath, 'full_finish_interview')
+            print('Full Finish Interview - Clicked')
             return True
         except Exception as error:
             ui_logger.error(error)

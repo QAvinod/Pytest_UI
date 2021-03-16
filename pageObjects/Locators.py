@@ -127,5 +127,10 @@ FEEDBACK = {
     'select_drop_down': '//select[@ng-model="row.rowOptions.selectedRating"]',
     'decision_button': '//*[@ng-repeat="option in vm.resultStatusOptions"]',
     'comments': '//textarea[@ng-model="row.rowOptions.skillComment"]',
-    'overall': '.form-control.ng-pristine.ng-valid.ng-empty.ng-touched'
+    'overall': '//*[@ng-model="vm.finalTranscript"]',
+    'submit': '//*[@ng-click="vm.submitFeedback(vm.isUpdateFeedback);"]',
+}
+
+INTERVIEWER_LOBBY = {
+    'finish_interview': '//*[@id="mainBodyElement"]/div[7]/div/div/div/div[2]/div[1]/button'
 }

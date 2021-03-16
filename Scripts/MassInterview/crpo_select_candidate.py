@@ -16,10 +16,10 @@ class SelectCandidate:
         ----------------- EXCEL READ AND TO ASSIGN VALUES TO RESPECTIVE INIT VARIABLES ------>>>>
         """
         slot_excel = excelRead.ExcelRead()
-        slot_excel.read(inputFile.INPUT_PATH['interview_lobby'], index=index)
+        slot_excel.read(inputFile.INPUT_PATH['candidate_lobby'], index=index)
         xl = slot_excel.excel_dict
-        self.xl_candidate_name = xl['event_name'][0].format(version)
-        self.xl_message_1 = xl['Message_1'][0]
+        self.xl_candidate_name = xl['name'][0].format(version)
+        self.your_turn = xl['your_turn_message'][0]
 
         self.select_candidate_collection = []
 
@@ -30,7 +30,7 @@ class SelectCandidate:
                   self.candidate_login.login_screen(candidate_id),
                   self.candidate_login.enter_to_room(),
                   self.candidate_login.candidate_name_validate(self.xl_candidate_name),
-                  self.candidate_login.it_is_your_message(self.xl_message_1),
+                  self.candidate_login.it_is_your_message(self.your_turn),
                   self.new_tab.window_close(),
                   self.new_tab.switch_to_window(0)
                   ]

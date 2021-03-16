@@ -8,17 +8,16 @@ class MassOutputReport:
         self.server = server
         self.start_date_time = start_date_time
         self.__path = outputFile.OUTPUT_PATH['Mass_Interview_output']
-        test_cases = 150
+        test_cases = 151
         excel_headers_1 = ['Event', 'Status', 'Applicant (Change Status)', 'Status', 'Configurations (Slot/Allocation)',
                            'Status', 'Slot Assignment', 'Status', 'Room Creation', 'Status', 'Candidate Login',
                            'Status', 'Assign Room', 'Status']
         color_headers_1 = ['Status', 'Event', 'Applicant (Change Status)', 'Configurations (Slot/Allocation)',
                            'Slot Assignment', 'Room Creation', 'Candidate Login', 'Assign Room']
 
-        excel_headers_2 = ['Interviewer-1 Login', 'Status', 'Select Candidate', 'Status', 'Invite Candidate', 'Status',
-                           'Provide Feedback', 'Status']
-        color_headers_2 = ['Status', 'Interviewer-1 Login', 'Select Candidate', 'Invite Candidate',
-                           'Provide Feedback']
+        excel_headers_2 = ['Interviewer-1 Login', 'Status', 'Select Candidate', 'Status', 'Provide Feedback', 'Status',
+                           'Invite Candidate', 'Status']
+        color_headers_2 = ['Status', 'Interviewer-1 Login', 'Select Candidate', 'Provide Feedback', 'Invite Candidate']
 
         self.xlw = excelWrite.ExcelReportWrite(version=version, test_cases=test_cases)
         self.xlw.excel_header_by_index(row=1, col=0, excel_headers_list=excel_headers_1,
@@ -99,7 +98,9 @@ class MassOutputReport:
                                      row=22, i_column=2, o_column=3, path=self.__path)
 
     def feedback_report(self, feed_coll):
-        testdata_headers = ['Provide Feedback action', 'Switch to tab']
+        testdata_headers = ['Provide Feedback action', 'Switch to tab', 'shortlist - decision', 'Ratings', 'comments',
+                            'overall comment', 'Feedback validation Agree', 'Review Feedback', 'Close Tab',
+                            'Switch to tab']
         self.xlw.input_output_report(testdata_headers=testdata_headers, collection=feed_coll,
                                      row=22, i_column=4, o_column=5, path=self.__path)
 
