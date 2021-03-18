@@ -1,6 +1,7 @@
 from Config import inputFile
 from utilities import excelRead, SwitchWindow
 from pageObjects.Pages.SearchPages import AdvanceSearchPage
+from pageObjects.Pages.StatusChangePage.StatusChange import ChangeStatus
 from pageObjects.Pages.CandidatePages import CandidateDetailsPage
 from pageObjects.Pages.EventPages import EventGetByNamePage, EventApplicantPage, EventActionsPage
 
@@ -14,7 +15,9 @@ class EventApplicant:
         self.event_action = EventActionsPage.Actions(self.driver)
         self.applicant_grid = EventApplicantPage.EventApplicant(self.driver)
         self.candidate_details = CandidateDetailsPage.CandidateDetailsPage(self.driver)
+        self.status_change = ChangeStatus(self.driver)
         self.window_switch = SwitchWindow.SwitchWindowClose(self.driver)
+
         """
         ----------------- EXCEL READ AND TO ASSIGN VALUES TO RESPECTIVE INIT VARIABLES ------>>>>
         """
@@ -55,10 +58,10 @@ class EventApplicant:
                   self.search.search_button(),
                   self.applicant_grid.select_applicant(),
                   self.applicant_grid.change_status_action(),
-                  self.applicant_grid.applicant_stage(self.xl_stage),
-                  self.applicant_grid.applicant_status(self.xl_status),
-                  self.applicant_grid.comment(self.xl_comment),
-                  self.applicant_grid.change_button(),
+                  self.status_change.applicant_stage(self.xl_stage),
+                  self.status_change.applicant_status(self.xl_status),
+                  self.status_change.comment(self.xl_comment),
+                  self.status_change.change_button(),
                   self.applicant_grid.applicant_get_name(self.xl_event_name, self.xl_message),
                   self.window_switch.switch_to_window(1),
                   self.candidate_details.candidate_status(self.xl_status),

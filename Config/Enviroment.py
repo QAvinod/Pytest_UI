@@ -15,10 +15,10 @@ class EnvironmentSetup:
         self.driver = webdriver.Chrome(executable_path=ChromeDriverManager().install())
         self.driver.maximize_window()
 
-        if self.server == 'qa':
+        if self.server == 'amsin':
             self.driver.get(ReadConfigFile.ReadConfig.get_qa_url())
             self.index = 0
-        elif self.server == 'dev':
+        elif self.server == 'ams':
             self.driver.get(ReadConfigFile.ReadConfig.get_production_url())
             self.index = 1
         elif self.server == 'beta':

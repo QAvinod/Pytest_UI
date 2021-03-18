@@ -8,7 +8,7 @@ class MassOutputReport:
         self.server = server
         self.start_date_time = start_date_time
         self.__path = outputFile.OUTPUT_PATH['Mass_Interview_output']
-        test_cases = 151
+        test_cases = 152
         excel_headers_1 = ['Event', 'Status', 'Applicant (Change Status)', 'Status', 'Configurations (Slot/Allocation)',
                            'Status', 'Slot Assignment', 'Status', 'Room Creation', 'Status', 'Candidate Login',
                            'Status', 'Assign Room', 'Status']

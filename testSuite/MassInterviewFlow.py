@@ -2,17 +2,16 @@ from Config import Enviroment
 from Listeners.logger_settings import ui_logger
 from Scripts.Login.crpo_login_page import CRPOLogin
 from Scripts.Output_scripts import MassInterviewReport
-from Scripts.MassInterview.crpo_enable_auto_assign import EnableAutoAssign
-from Scripts.MassInterview.crpo_event_change_applicant_status import EventApplicant
-from Scripts.MassInterview.crpo_event_slot_configuration import SlotConfiguration
-from Scripts.MassInterview.crpo_candidate_login import CandidateLobbyLogin
 from Scripts.MassInterview.crpo_room_create import Room
 from Scripts.MassInterview.crpo_assign_room import AssignRoom
 from Scripts.MassInterview.crpo_interviewer_login import InterviewLogin
 from Scripts.MassInterview.crpo_select_candidate import SelectCandidate
 from Scripts.MassInterview.crpo_invite_candidate import InviteCandidate
 from Scripts.MassInterview.crpo_provide_feedback import ProvideFeedback
-import time
+from Scripts.MassInterview.crpo_enable_auto_assign import EnableAutoAssign
+from Scripts.MassInterview.crpo_event_change_applicant_status import EventApplicant
+from Scripts.MassInterview.crpo_event_slot_configuration import SlotConfiguration
+from Scripts.MassInterview.crpo_candidate_login import CandidateLobbyLogin
 
 
 class MassInterviewFlow:
